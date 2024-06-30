@@ -1,0 +1,7 @@
+{
+  "name": "getTouxiangCategory",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

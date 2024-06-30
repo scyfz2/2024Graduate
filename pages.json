@@ -1,0 +1,78 @@
+{
+	"pages": [
+		{
+			"path": "pages/entrance/entrance",
+			"style": {
+				"navigationBarTitleText": "美化头像",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "UNNC毕业季"
+			}
+		},
+		{
+			"path": "pages/preview/index",
+			"style": {
+				"navigationBarTitleText": "UNNC毕业季"
+			}
+		},
+		{
+			"path": "pages/share/index",
+			"style": {
+				"navigationBarTitleText": "UNNC毕业季"
+			}
+		}, {
+			"path": "pages/mine/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "2024",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	}
+}
+// {
+// 	"pages": [
+// 		{
+// 			"path" : "pages/entrance/entrance",
+// 		    "style" :{
+// 		        "navigationBarTitleText": "UNNC毕业季",
+// 		        "navigationBarTextStyle": "white",
+// 		         "navigationBarBackgroundColor": "#10263b"
+// 		    }
+// 		}
+// 		,{
+// 			"path": "pages/mine/index",
+// 			"style": {
+// 				"navigationBarTitleText": "我的",
+// 				"navigationStyle": "custom"
+// 			}
+// 		},{
+// 			"path": "pages/index/index",
+// 			"style": {
+// 				"navigationBarTitleText": "美化头像",
+// 				"navigationStyle": "custom"
+// 			}
+// 		}
+//     ],
+// 	"globalStyle": {
+// 		"navigationBarTextStyle": "black",
+// 		"navigationBarTitleText": "2024",
+// 		"navigationBarBackgroundColor": "#F8F8F8",
+// 		"backgroundColor": "#F8F8F8",
+// 		"app-plus": {
+// 			"background": "#efeff4"
+// 		}
+// 	}
+// }

@@ -1,0 +1,45 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"code": {
+			"bsonType": "string",
+			"title": "头像编码",
+			"description": "头像编码",
+			"trim": "both"
+		},
+		"name": {
+			"bsonType": "string",
+			"title": "头像描述",
+			"description": "头像描述",
+			"trim": "both"
+		},
+		"link": {
+			"bsonType": "string",
+			"title": "链接",
+			"description": "链接",
+			"trim": "both"
+		},
+		"action": {
+			"bsonType": "string",
+			"title": "动作",
+			"description": "动作",
+			"trim": "both"
+		},
+		"AvatartypeDetailList": {
+			"bsonType": "object",
+			"title": "图片",
+			"description": "图片",
+			"trim": "both"
+		}
+	}
+}
