@@ -49,7 +49,7 @@
 							:class="{hideHandle: !item.edit}" id="handle" :data-key="`mask_${item.key}`"
 							:style="{top: 0  + 'px', left:'0px'}"></text>
 						<text class="cuIcon-full handle circle" :class="{hideHandle: !item.edit}" :data-key="`mask_${item.key}`"
-							id="handle" :style="{bottom:0+ 'px', left:'0px'}"></text>
+							id="handle" :style="{bottom:0+ 'px', right:'0px'}"></text>
 					</view>
 				</view>
 
@@ -146,7 +146,7 @@
 			return {
 				cropAspectRatio: '10:5',
 				bgUrl: 'https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/logo-back.png', //背景图片
-				photoUrl: 'https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/frame2.png', //头像图片
+				photoUrl: '', //头像图片
 				gsUrl: "",
 
 				url: "",
@@ -606,14 +606,16 @@
 					let w = initialW + (lineB - lineA);
 					//由于是等比缩放，所以乘一个宽高比例。
 					let h = initialH + (lineB - lineA) * (initialH / initialW);
-					//定义最小宽高
-					item.width = w <= 5 ? 5 : w;
-					item.height = h <= 5 ? 5 : h;
-					if (w > 5 && h > 5) {
+					//定义最大宽高
+					item.width = w >= initialW*2? initialW*2 : w;
+					item.height = h >= initialH*2 ? initialH*2 : h;
+					
+					if (w < initialW*2 && h < initialH*2) {
 						// 放大 或 缩小
 						item.x = initialX - (lineB - lineA) / 2;
 						item.y = initialY - (lineB - lineA) / 2;
 					}
+					
 
 
 
