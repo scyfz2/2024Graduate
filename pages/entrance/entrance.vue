@@ -28,6 +28,7 @@
 		</view>
 	</view>
 	
+<!-- 	增加了几个组件数量 -->
 	<view class="right-half-banner">
 	  <view class="confetti"></view>
 	  <view class="confetti"></view>
@@ -50,7 +51,12 @@
 	  <view class="confetti"></view>
 	  <view class="confetti"></view>
 	  <view class="confetti"></view>
+	  <view class="confetti"></view>
+	  <view class="confetti"></view>
+	  <view class="confetti"></view>
+	  <view class="confetti"></view>
 	</view>
+<!-- 	增加了几个组件数量 -->
 
 </view>
 
@@ -228,7 +234,7 @@ export default {
     top: 0;
     right: 0;
     width: 95vw; /* 右半边屏幕宽度 */
-    height: 87vh; /* 视口高度 */
+    height: 100vh; /* 视口高度 */
     overflow: hidden; /* 隐藏超出部分 */
   }
 
@@ -252,7 +258,7 @@ export default {
 
 .confetti:nth-child(3) {
   background-color: #F98109; 
-  animation-duration: 4s; /* 不同彩带可以有不同的动画持续时间 */
+  animation-duration: 8s; /* 不同彩带可以有不同的动画持续时间 */
   animation-delay: 2s; /* 延迟开始动画 */
   left: 40%; /* 从屏幕的中间开始 */
 }
@@ -266,14 +272,14 @@ export default {
 
 .confetti:nth-child(5) {
   background-color: #8FC31F; 
-  animation-duration: 8s; /* 不同彩带可以有不同的动画持续时间 */
+  animation: confetti-fall-alt4 3s linear infinite; /* 使用不同的动画名称 */
   animation-delay: 1.4s; /* 延迟开始动画 */
   left: 25%; /* 从屏幕的中间开始 */
 }
 
 .confetti:nth-child(6) {
   background-color: #B91C2E; 
-  animation: confetti-fall-alt 6s linear infinite; /* 使用不同的动画名称 */
+  animation: confetti-fall-alt3 6s linear infinite; /* 使用不同的动画名称 */
   animation-delay: 1.6s; /* 延迟开始动画 */
   left: 80%; /* 从屏幕的中间开始 */
 }
@@ -287,15 +293,15 @@ export default {
 
 .confetti:nth-child(8) {
   background-color: #37B4B0; 
-  animation-duration: 7s; /* 不同彩带可以有不同的动画持续时间 */
+  animation: confetti-fall-alt3 3s linear infinite; /* 使用不同的动画名称 */
   animation-delay: 2s; /* 延迟开始动画 */
   left: 65%; /* 从屏幕的中间开始 */
 }
 
 .confetti:nth-child(9) {
   background-color: #F98109; 
-  animation-duration: 6.5s; /* 不同彩带可以有不同的动画持续时间 */
-  animation-delay: 2.2s; /* 延迟开始动画 */
+  animation: confetti-fall-alt 3s linear infinite; /* 使用不同的动画名称 */
+  animation-delay: 2s; /* 延迟开始动画 */
   left: 15%; /* 从屏幕的中间开始 */
 }
 
@@ -315,8 +321,8 @@ export default {
 
 .confetti:nth-child(12) {
   background-color: #F98109; 
-  animation: confetti-fall-alt2 5s linear infinite; /* 使用不同的动画名称 */
-  animation-delay: 2.2s; /* 延迟开始动画 */
+  animation: confetti-fall-alt4 7s linear infinite; /* 使用不同的动画名称 */
+  animation-delay: 3s; /* 延迟开始动画 */
   left: 35%; /* 从屏幕的中间开始 */
 }
 
@@ -336,7 +342,7 @@ export default {
 
 .confetti:nth-child(15) {
   background-color: #8FC31F; 
-  animation: confetti-fall-alt2 6.5s linear infinite; /* 使用不同的动画名称 */
+  animation: confetti-fall-alt4 6.5s linear infinite; /* 使用不同的动画名称 */
   animation-delay: 2.2s; /* 延迟开始动画 */
   left: 55%; /* 从屏幕的中间开始 */
 }
@@ -354,23 +360,54 @@ export default {
 }
 .confetti:nth-child(18) {
   background-color: #37B4B0; 
-  animation: confetti-fall-alt 10s linear infinite; /* 使用不同的动画名称 */
+  animation: confetti-fall-alt4 10s linear infinite; /* 使用不同的动画名称 */
   animation-delay: 2.2s; /* 延迟开始动画 */
   left: 65%; /* 从屏幕的中间开始 */
 }
 .confetti:nth-child(19) {
   background-color: #F98109; 
-  animation-duration: 4s; /* 不同彩带可以有不同的动画持续时间 */
-  animation-delay: 2s; /* 延迟开始动画 */
+  animation: confetti-fall-alt4 13s linear infinite; /* 使用不同的动画名称 */
+  animation-delay: 4s; /* 延迟开始动画 */
   left: 20%; /* 从屏幕的中间开始 */
 }
 .confetti:nth-child(20) {
-  background-color: #8FC31F; 
-  animation: confetti-fall-alt2 10s linear infinite; /* 使用不同的动画名称 */
+  background-color: #ffffff; 
+  animation: confetti-fall-alt3 10s linear infinite; /* 使用不同的动画名称 */
   animation-delay: 2.2s; /* 延迟开始动画 */
+  transform: rotate(80deg); 
+  left: 15%; /* 从屏幕的中间开始 */
+}
+/* 增加摆动组件数量 */
+.confetti:nth-child(21) {
+  background-color: #F98109; 
+  animation: confetti-fall-alt5 12s linear infinite; /* 使用不同的动画名称 */
+  animation-delay: 1.4s; /* 延迟开始动画 */
+  left: 65%; /* 从屏幕的中间开始 */
+}
+
+.confetti:nth-child(22) {
+  background-color: #B91C2E; 
+  animation: confetti-fall-alt5 6s linear infinite; /* 使用不同的动画名称 */
+  animation-delay: 2.6s; /* 延迟开始动画 */ 
   left: 15%; /* 从屏幕的中间开始 */
 }
 
+.confetti:nth-child(23) {
+  background-color: #8FC31F; 
+  animation: confetti-fall-alt5 8s linear infinite; /* 使用不同的动画名称 */
+  animation-delay: 3.2s; /* 延迟开始动画 */
+  left: 25%; /* 从屏幕的中间开始 */
+}
+
+.confetti:nth-child(24) {
+  background-color: #009BC1; 
+  animation: confetti-fall-alt5 7s linear infinite; /* 使用不同的动画名称 */
+  animation-delay: 1.2s; /* 延迟开始动画 */
+  left: 75%; /* 从屏幕的中间开始 */
+}
+/* 增加摆动组件数量 */
+
+/* 增加摆动效果 */
   /* 定义彩带飘落的动画 */
 @keyframes confetti-fall {
   0% {
@@ -420,4 +457,65 @@ export default {
   }
 }
 
+@keyframes confetti-fall-alt3 {
+  0% {
+    transform: translateY(0) translateX(60px) rotate(50deg);
+    opacity: 1;
+  }
+  50% {
+    /* 50%的时间点 */
+    transform: translateY(40vh) translateX(-35px) rotate(-90deg);
+    opacity: 0.7;
+  }
+  75% {
+    /* 75%的时间点*/
+    transform: translateY(60vh) translateX(45px) rotate(40deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(80vh) translateX(30px) rotate(95deg);
+    opacity: 0;
+  }
+}
+@keyframes confetti-fall-alt4 {
+  0% {
+    transform: translateY(0) translateX(40px) rotate(-40deg);
+    opacity: 1;
+  }
+  50% {
+    /* 50%的时间点 */
+    transform: translateY(40vh) translateX(85px) rotate(80deg);
+    opacity: 0.7;
+  }
+  75% {
+    /* 75%的时间点*/
+    transform: translateY(60vh) translateX(-25px) rotate(-70deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(80vh) translateX(-40px) rotate(45deg);
+    opacity: 0;
+  }
+}
+@keyframes confetti-fall-alt5 {
+  0% {
+    transform: translateY(0) translateX(20px) rotate(-90deg);
+    opacity: 1;
+  }
+  50% {
+    /* 50%的时间点 */
+    transform: translateY(30vh) translateX(-35px) rotate(90deg);
+    opacity: 0.7;
+  }
+  75% {
+    /* 75%的时间点*/
+    transform: translateY(50vh) translateX(45px) rotate(-80deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(70vh) translateX(-40px) rotate(75deg);
+    opacity: 0;
+  }
+}
+/* 增加摆动效果 */
 </style>
