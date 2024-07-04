@@ -8,7 +8,7 @@
 					id="avatar-bg" :src="avatarPath"></image>
 			</view>
 			<image style="position: absolute;" :src="imgurl" :style="{ 
-				top: 15+'px', left: 15+'px', width: maskSizeWidth+'px',height: maskSizeHeight+'px',}">
+				top: 15+'px', left: 15+'px', width: ma skSizeWidth+'px',height: maskSizeHeight+'px',}">
 			</image>
 
 			<image mode="aspectFit" class="mask flip-horizontal" :class="{maskWithBorder: showBorder}" id='mask'
@@ -30,7 +30,7 @@
 					<image @touchstart="touchAvatarBg" class="bg avatar-bg" id="avatar-bg" :src="avatarPath"></image>
 				</view>
 				<!-- <image style="position: absolute; width: 100% ;height: 100%" :src="imgurl"> -->
-				<image style="position: absolute;" :src="imgurl" mode="widthFix">
+				<image style="position: absolute; width: 100%; height: 100%;" :src="imgurl" mode="widthFix">
 				</image>
 
 				<!-- <image mode="aspectFit" class="mask flip-horizontal" :class="{maskWithBorder: showBorder}" id='mask'
@@ -99,7 +99,8 @@
 					<view class="flex-col items-center button text-wrapper_3" @click="onChooseAvatar">
 						<text class="button_font">Choose a Pic</text>
 					</view>
-					<view class="ml-16 flex-col items-center button text-wrapper_4" :class="nextState ? 'text-wrapper_4_bg1' : 'text-wrapper_4_bg2'" @click="nextStep1()">
+					<view class="ml-16 flex-col items-center button text-wrapper_4"
+						:class="nextState ? 'text-wrapper_4_bg1' : 'text-wrapper_4_bg2'" @click="nextStep1()">
 						<text class="button_font" style="color: white;">Next</text>
 					</view>
 				</view>
@@ -121,14 +122,15 @@
 					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack">
 						<text class="button_font">Back</text>
 					</view>
-					<view class="ml-16 flex-col items-center button text-wrapper_5" :class="maskOptList.length > 0 ? 'text-wrapper_5_bg1' : 'text-wrapper_5_bg2'" @click="compositionUrl()">
+					<view class="ml-16 flex-col items-center button text-wrapper_5"
+						:class="maskOptList.length > 0 ? 'text-wrapper_5_bg1' : 'text-wrapper_5_bg2'" @click="compositionUrl()">
 						<text class="button_font" style="color: white;">Generate</text>
 					</view>
 				</view>
 			</view>
 		</view>
 
-		<ksp-cropper mode="free" :width="imgWidth" :height="imgHeight" :maxWidth="1024" :maxHeight="1024" :url="url"
+		<ksp-cropper mode="fixed"  :width="modeWidth" :height="modeHeight" :maxWidth="1024" :maxHeight="1024" :url="url"
 			@cancel="oncancel" @ok="onok"></ksp-cropper>
 
 
@@ -142,6 +144,7 @@
 	export default {
 		data() {
 			return {
+				cropAspectRatio: '10:5',
 				bgUrl: 'https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/logo-back.png', //背景图片
 				photoUrl: 'https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/frame2.png', //头像图片
 				gsUrl: "",
@@ -165,6 +168,7 @@
 				imgurl1: "",
 				showBorder: false,
 				showBorder1: false,
+				
 
 				maskSize: 0,
 				maskCenterX: wx.getSystemInfoSync().windowWidth / 2,
@@ -254,6 +258,20 @@
 			getMaskOptKey() {
 				return this.maskOptList.map(item => item.key)
 			},
+			modeWidth() {
+				let width = 575;
+				if(this.type !== 'endlong') {
+					width = 767;
+				}
+				return width;
+			},
+			modeHeight() {
+				let height = 767;
+				if(this.type !== 'endlong') {
+					height = 575;
+				}
+				return height;
+			},
 			maskPic: function() {
 				var pic = this.imgurl;
 				console.log(pic)
@@ -266,7 +284,7 @@
 			},
 			nextState() {
 				let state = false;
-				if (this.imgSelectIndex != null && this.avatarPath != null) { 
+				if (this.avatarPath != null) {
 					state = true;
 				}
 				return state
@@ -285,7 +303,7 @@
 			this.maskSizeWidth = maxWidth
 
 			this.imgSelectIndex = 0
-			this.selectImg(this.imgList1[this.imgSelectIndex], this.imgSelectIndex)
+			// this.selectImg(this.imgList1[this.imgSelectIndex], this.imgSelectIndex)
 		},
 		methods: {
 			getRatioFun(val, item) {
@@ -308,11 +326,11 @@
 				})
 			},
 			change(e) {
-				console.log("实际上1",e);
+				console.log("实际上1", e);
 				this.throttle(this.handleSkip(e), 500)
 			},
 			handleSkip(e) {
-				if(this.maskOptList.length < 1) {
+				if (this.maskOptList.length < 1) {
 					uni.showToast({
 						title: 'choose tags',
 						duration: 2000,
@@ -344,6 +362,28 @@
 						// this.avatarPath = res.tempFilePaths[0];
 					}
 				});
+				// let _this = this;
+				// uni.chooseImage({
+				// 	count: 1, // 默认选择一张图片
+				// 	sizeType: ['original', 'compressed'], // 可以选择原图或压缩图
+				// 	sourceType: ['album', 'camera'], // 可以从相册选择或使用相机拍摄
+				// 	success: function(chooseImageRes) {
+				// 		const tempFilePaths = chooseImageRes.tempFilePaths;
+				// 		uni.cropImage({
+				// 			src: tempFilePaths[0], // 图片路径
+				// 			destWidth: 300, // 裁剪后的宽度
+				// 			destHeight: 300, // 裁剪后的高度
+				// 			quality: 1, // 裁剪后的图片质量
+				// 			success: function(cropImageRes) {
+				// 				_this.url = cropImageRes.tempFilePath
+				// 				console.log('裁剪后的图片路径：' + cropImageRes.tempFilePath);
+				// 			},
+				// 			fail: function(err) {
+				// 				console.error('裁剪失败：' + err.errMsg);
+				// 			}
+				// 		});
+				// 	}
+				// });
 			},
 			onok(ev) {
 				console.log("事件触发");
@@ -637,14 +677,14 @@
 				this.showBorder = true;
 			},
 			nextStep1() {
-				if (this.imgSelectIndex == null) {
-					uni.showToast({
-						title: 'choose frame',
-						duration: 2000,
-						icon: "none"
-					})
-					return
-				}
+				// if (this.imgSelectIndex == null) {
+				// 	uni.showToast({
+				// 		title: 'choose frame',
+				// 		duration: 2000,
+				// 		icon: "none"
+				// 	})
+				// 	return
+				// }
 				if (this.avatarPath == null) {
 					uni.showToast({
 						title: 'choose pic',
@@ -997,9 +1037,11 @@
 		border-radius: 57.25rpx;
 		height: 89.69rpx;
 	}
+
 	.text-wrapper_4_bg1 {
 		background-color: #8FC31E;
 	}
+
 	.text-wrapper_4_bg2 {
 		background-color: #dddfe2;
 	}
@@ -1011,9 +1053,11 @@
 		border-radius: 57.25rpx;
 		height: 89.69rpx;
 	}
+
 	.text-wrapper_5_bg1 {
 		background-color: #F98109;
 	}
+
 	.text-wrapper_5_bg2 {
 		background-color: #dddfe2;
 	}
@@ -1151,9 +1195,9 @@
 
 	.circle {
 		border-radius: 50%;
-		font-size: 15px;
+		font-size: 35rpx;
 		color: #000;
-		line-height: 25px;
+		line-height: 55rpx;
 		text-align: center;
 		background: #fff;
 	}
@@ -1162,8 +1206,8 @@
 	.cancel {
 		position: absolute;
 		z-index: 1;
-		width: 25px;
-		height: 25px;
+		width: 55rpx;
+		height: 55rpx;
 		background-color: white;
 		color: black;
 	}

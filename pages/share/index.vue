@@ -5,10 +5,10 @@
 
 		<view class="flex-row group_6 mt-27">
 			<view class="flex-col items-center button text-wrapper_3" @click="NextPic()">
-				<text class="button_font">Next Pic</text>
+				<text class="button_font">Next pic</text>
 			</view>
 			<view class="flex-col items-center button text-wrapper_4" @click="saveCanvasToAlbum()">
-				<text class="button_font_white">Share Poster</text>
+				<text class="button_font_white">Download poster</text>
 			</view>
 		</view>
 
@@ -73,10 +73,10 @@
 					// 绘制线条元素
 					ctx.setFillStyle('#10263b');
 					ctx.fillRect(24 * scale, 55 * scale, 282 * scale, 39 * scale);
-					ctx.fillRect(24 * scale, 100 * scale, 312 * scale, 39 * scale);
+					ctx.fillRect(24 * scale, 100 * scale, 282 * scale, 39 * scale);
 
 					// 绘制下面NO.线条元素
-					ctx.fillRect(192 * scale, 510 * scale, 140 * scale, 39 * scale);
+					ctx.fillRect(192 * scale, 510 * scale, 145 * scale, 42 * scale);
 
 					// 绘制文字
 					const FontSize = 32 * scale; // 转换为 CSS 像素
@@ -84,11 +84,11 @@
 					ctx.font = 'bold 32px Circular Pro'; // 粗体，32px大小，Arial字体
 					ctx.setFontSize(32 * scale);
 					ctx.setFillStyle('#ffffff');
-					ctx.fillText('Congratulations!', (24 + 8) * scale, (55 + 30) * scale);
+					ctx.fillText('Congratuations!', (24 + 8) * scale, (55 + 30) * scale);
 
 					ctx.setFontSize(32 * scale);
 					ctx.setFillStyle('#ffffff');
-					ctx.fillText('# graduation 2024', (24 + 8) * scale, (100 + 30) * scale);
+					ctx.fillText('# Class of 2024', (24 + 8) * scale, (100 + 30) * scale);
 
 					ctx.setFontSize(32 * scale);
 					ctx.setFillStyle('#ffffff');
@@ -97,12 +97,28 @@
 					ctx.setFontSize(20 * scale);
 					ctx.font = '20px Circular Pro'; // black，32px大小，Circular Pro字体
 					ctx.setFillStyle('#10263B');
-					ctx.fillText('Congrats', 238 * scale, 577 * scale);
+					ctx.fillText('Congrats', 260 * scale, 577 * scale);
 
 					ctx.setFontSize(20 * scale);
 					ctx.font = '20px Circular Pro'; // black，32px大小，Circular Pro字体
 					ctx.setFillStyle('#10263B');
-					ctx.fillText('from UNNC', 210 * scale, 600 * scale);
+					ctx.fillText('from UNNC', 240 * scale, 600 * scale);
+
+					ctx.setFontSize(15 * scale);
+					ctx.font = '12px PingFang SC'; // black，32px大小，Circular Po字体
+					ctx.setFillStyle('#10263b');
+					ctx.fillText('Scan to generate', 89 * scale, 561 * scale); 
+					ctx.fillText('your', 89 * scale, 571 * scale);
+					ctx.fillText('graduation', 89 * scale, 581 * scale);
+					ctx.fillText('photos!', 89 * scale, 591 * scale);
+					
+					// 设置填充颜色为灰色，例如 '#cccccc'
+					ctx.setFillStyle('#000000');
+					// 绘制圆形路径
+					ctx.beginPath();
+					ctx.arc(52, 590, 30, 0, Math.PI * 2, true);			
+					// 填充路径
+					ctx.fill();
 
 					// 绘制图片
 					// const imgUrl = '/static/index/frame1.png';
@@ -113,24 +129,7 @@
 					} else {
 						ctx.drawImage(imgUrl, 15 * scale, 159 * scale, 321 * scale, 240 * scale);
 					}
-
-					ctx.setFontSize(10 * scale);
-					ctx.font = '10px PingFang SC'; // black，32px大小，Circular Po字体
-					ctx.setFillStyle('#10263b');
-					ctx.fillText('Generate', 89 * scale, 561 * scale);
-					ctx.fillText('your', 89 * scale, 571 * scale);
-					ctx.fillText('graduation', 89 * scale, 581 * scale);
-					ctx.fillText('poster', 89 * scale, 591 * scale);
-
-					// 设置填充颜色为灰色，例如 '#cccccc'
-					// ctx.setFillStyle('#cccccc');
-					// 绘制圆形路径
-					ctx.beginPath();
-					ctx.arc(52, 574, 30, 0, Math.PI * 2, true);
-
-					// 填充路径
-					ctx.fill();
-
+				
 					ctx.draw();
 				})
 
