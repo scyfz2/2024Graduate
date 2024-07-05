@@ -109,7 +109,7 @@
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper":"uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper","uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition":"uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition","node-modules/@dcloudio/uni-cli-shared/components/unicloud-db":"node-modules/@dcloudio/uni-cli-shared/components/unicloud-db"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper":"uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper","uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition":"uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

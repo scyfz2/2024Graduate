@@ -1557,7 +1557,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8923,7 +8923,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8944,14 +8944,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9047,7 +9047,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"UNNC 2024 毕业季电子相框","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -18051,12 +18051,6 @@ var _default = {
     "style": {
       "navigationBarTitleText": "UNNC毕业季"
     }
-  }, {
-    "path": "pages/mine/index",
-    "style": {
-      "navigationBarTitleText": "我的",
-      "navigationStyle": "custom"
-    }
   }],
   "globalStyle": {
     "navigationBarTextStyle": "black",
@@ -19766,151 +19760,6 @@ var index_cjs = {
 module.exports = index_cjs;
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
-
-/***/ }),
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */
-/*!************************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/index.js ***!
-  \************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _en_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./en.json */ 114);
-var _en_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./en.json */ 114, 1);
-/* harmony import */ var _es_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./es.json */ 115);
-var _es_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./es.json */ 115, 1);
-/* harmony import */ var _fr_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fr.json */ 116);
-var _fr_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./fr.json */ 116, 1);
-/* harmony import */ var _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./zh-Hans.json */ 117);
-var _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./zh-Hans.json */ 117, 1);
-/* harmony import */ var _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./zh-Hant.json */ 118);
-var _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./zh-Hant.json */ 118, 1);
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  en: _en_json__WEBPACK_IMPORTED_MODULE_0__,
-  es: _es_json__WEBPACK_IMPORTED_MODULE_1__,
-  fr: _fr_json__WEBPACK_IMPORTED_MODULE_2__,
-  'zh-Hans': _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3__,
-  'zh-Hant': _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4__
-});
-
-
-/***/ }),
-/* 114 */
-/*!***********************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/en.json ***!
-  \***********************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"Success\",\"uniCloud.component.update.success\":\"Success\",\"uniCloud.component.update.showModal.title\":\"Tips\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"Tips\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
-
-/***/ }),
-/* 115 */
-/*!***********************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/es.json ***!
-  \***********************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
-
-/***/ }),
-/* 116 */
-/*!***********************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/fr.json ***!
-  \***********************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
-
-/***/ }),
-/* 117 */
-/*!****************************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/zh-Hans.json ***!
-  \****************************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
-
-/***/ }),
-/* 118 */
-/*!****************************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/zh-Hant.json ***!
-  \****************************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否刪除數據\"}");
 
 /***/ })
 ]]);

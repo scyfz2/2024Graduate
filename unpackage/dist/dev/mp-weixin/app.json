@@ -3,8 +3,7 @@
     "pages/entrance/entrance",
     "pages/index/index",
     "pages/preview/index",
-    "pages/share/index",
-    "pages/mine/index"
+    "pages/share/index"
   ],
   "subPackages": [],
   "window": {

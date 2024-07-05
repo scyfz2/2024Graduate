@@ -24,12 +24,6 @@
 			"style": {
 				"navigationBarTitleText": "UNNC毕业季"
 			}
-		}, {
-			"path": "pages/mine/index",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"navigationStyle": "custom"
-			}
 		}
 	],
 	"globalStyle": {
