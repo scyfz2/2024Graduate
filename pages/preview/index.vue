@@ -34,10 +34,6 @@
 			console.log(options, "/options");
 			_this.avatarPath = decodeURIComponent(options.path);
 			_this.type = options.type;
-			this.initShare();
-		},
-		onShow() {
-			 this.initShare();
 		},
 		methods: {
 			goBack() {
@@ -45,19 +41,6 @@
 					delta: 1 // 返回的页面层级，默认值为1
 				});
 			},
-			onShareAppMessage(options) {
-			    return {
-			      title: 'UNNC毕业季', // 转发的标题
-			      path: '/pages/entrance/entrance', // 转发的页面路径
-			      imageUrl: '/static/logo.png', // 可以是本地路径或网络图片
-			      success: function(res) {
-			        // 转发成功
-			      },
-			      fail: function(err) {
-			        // 转发失败
-			      }
-			    };
-			  },
 			handleSaveEvent() {
 				let _this = this;
 				uni.showLoading({

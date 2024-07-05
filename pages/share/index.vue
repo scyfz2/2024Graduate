@@ -33,11 +33,9 @@
 			console.log(options, "/options");
 			_this.avatarPath = decodeURIComponent(options.path);
 			_this.type = options.type;
-			this.initShare();
 		},
 		onShow() {
 			this.drawCanvas();
-			 this.initShare();
 		},
 		methods: {
 			initShare: function() {
@@ -50,19 +48,6 @@
 					url: `/pages/index/index`
 				});
 			},
-			onShareAppMessage(options) {
-			    return {
-			      title: 'UNNC毕业季', // 转发的标题
-			      path: '/pages/entrance/entrance', // 转发的页面路径
-			      imageUrl: '/static/logo.png', // 可以是本地路径或网络图片
-			      success: function(res) {
-			        // 转发成功
-			      },
-			      fail: function(err) {
-			        // 转发失败
-			      }
-			    };
-			  },
 			drawCanvas(withBackground = false) {
 				console.log("Hello drawCanvas!");
 				this.$http.request({

@@ -175,11 +175,9 @@ var _default = {
     console.log(options, "/options");
     _this.avatarPath = decodeURIComponent(options.path);
     _this.type = options.type;
-    this.initShare();
   },
   onShow: function onShow() {
     this.drawCanvas();
-    this.initShare();
   },
   methods: {
     initShare: function initShare() {
@@ -191,22 +189,6 @@ var _default = {
       uni.navigateTo({
         url: "/pages/index/index"
       });
-    },
-    onShareAppMessage: function onShareAppMessage(options) {
-      return {
-        title: 'UNNC毕业季',
-        // 转发的标题
-        path: '/pages/entrance/entrance',
-        // 转发的页面路径
-        imageUrl: '/static/logo.png',
-        // 可以是本地路径或网络图片
-        success: function success(res) {
-          // 转发成功
-        },
-        fail: function fail(err) {
-          // 转发失败
-        }
-      };
     },
     drawCanvas: function drawCanvas() {
       var _this2 = this;
