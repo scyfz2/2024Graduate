@@ -8,7 +8,7 @@
 					id="avatar-bg" :src="avatarPath"></image>
 			</view>
 			<image style="position: absolute;" :src="imgurl" :style="{ 
-				top: 15+'px', left: 15+'px', width: maskSizeWidth+'px',height: maskSizeHeight+'px',}">
+				top: 15+'px', left: 15+'px', width: ma skSizeWidth+'px',height: maskSizeHeight+'px',}">
 			</image>
 
 			<image mode="aspectFit" class="mask flip-horizontal" :class="{maskWithBorder: showBorder}" id='mask'
@@ -24,33 +24,44 @@
 
 		</view> -->
 		<view class="body">
-			<view class="avatar-container grid justify-center" :class="type" id="avatar-container" @touchstart="touchStart"
-				@touchend="touchEnd" @touchmove="touchMove">
+			<view class="avatar-container grid justify-center" :class="type" id="avatar-container"
+				@touchstart.stop="touchStart" @touchend.stop="touchEnd" @touchmove.stop="touchMove">
 				<view class="avatar-bg-border">
 					<image @touchstart="touchAvatarBg" class="bg avatar-bg" id="avatar-bg" :src="avatarPath"></image>
 				</view>
 				<!-- <image style="position: absolute; width: 100% ;height: 100%" :src="imgurl"> -->
-				<image style="position: absolute;" :src="imgurl" mode="widthFix">
+				<image style="position: absolute; width: 100%; height: 100%;" :src="imgurl" mode="widthFix">
 				</image>
 
-				<image mode="aspectFit" class="mask flip-horizontal" :class="{maskWithBorder: showBorder}" id='mask'
+				<!-- <image mode="aspectFit" class="mask flip-horizontal" :class="{maskWithBorder: showBorder}" id='mask'
 					:src="gsUrl"
 					:style="{ width: maskSizeWidth1+'px',height: maskSizeHeight1+'px',
-				top: maskCenterY - maskSizeWidth1/2-2+'px', left: maskCenterX - maskSizeHeight1/2-2+'px', transform: 'rotate(' +rotate+ 'deg)' + 'scale(' +scale+')' + 'rotateY('+ rotateY +'deg)'}">
-				</image>
-				<text @click="closeGuashi()" class="cuIcon-close handle circle" :class="{hideHandle: !showBorder}" id="handle"
-					:style="{top:cancelCenterY- maskSizeWidth1/2  + 'px', left:cancelCenterX- maskSizeHeight1/2+'px'}"></text>
-				<text class="cuIcon-full handle circle" :class="{hideHandle: !showBorder}" id="handle"
-					:style="{top:handleCenterY + 'px', left:handleCenterX- maskSizeHeight1/2  +'px'}"></text>
+				top: maskCenterY - maskSizeHeight1/2+'px', left: maskCenterX - maskSizeWidth1/2+'px', transform: 'rotate(' +rotate+ 'deg)' + 'scale(' +scale+')' + 'rotateY('+ rotateY +'deg)'}">
+				</image> -->
+				<view v-for="(item,index) in maskOptList" :id="`mask_${item.key}`" :data-key="`mask_${item.key}`"
+					:data-index="index" :key="item.key" class="m-mask-item" :class="{maskWithBorder: item.edit }"
+					:style="{ width: item.width+'px',height: item.height+'px',
+				top: item.centerY - item.height/2+'px', left: item.centerX - item.width/2+'px', transform: 'rotate(' +item.rotate+ 'deg)' + 'scale(' +item.scale+')' + 'rotateY('+ item.rotateY +'deg)'}">
+					<view class="m-mask-view">
+						<image :src="item.url" mode="" :id="`mask_${item.key}`" :data-key="`mask_${item.key}`"
+							:data-index="index">
+						</image>
+						<text @touchstart.stop="closeGuashi(index)" class="cuIcon-close handle circle"
+							:class="{hideHandle: !item.edit}" id="handle" :data-key="`mask_${item.key}`"
+							:style="{top: 0  + 'px', left:'0px'}"></text>
+						<text class="cuIcon-full handle circle" :class="{hideHandle: !item.edit}"
+							:data-key="`mask_${item.key}`" id="handle" :style="{top:0+ 'px', right:'0px'}"></text>
+					</view>
+				</view>
+
+
 
 			</view>
 
 		</view>
 		<view class="watermark">
 			<text class="watermark1">
-				{{step < 1 ? "Please choose a picture" : "Use two fingers to drag & zoom-in/out"}}
-
-				<!-- <text class="watermark1-content">Graduation</text> -->
+				{{step === 0 ? "Please choose a frame" : step === 1 ? "Click here to choose pic" : "Use two fingers to drag & zoom-in/out"}}
 			</text>
 			<view class="watermark2">
 				Graduation
@@ -58,66 +69,93 @@
 		</view>
 
 		<liu-picture-composition ref="picRef" :bgUrl="bgUrl" :photoUrl="photoUrl" :guashiUrl="gsUrl" :width="imgWidth"
-			:height="imgHeight" :dWidth="imgWidth" :dHeight="imgHeight" :gsWidth="maskSizeWidth1*scale"
-			:gsHeight="maskSizeHeight1*scale" :x="0" :y="0" :dx="0" :dy="0" :gsx="maskCenterX"
-			:gsy="maskCenterY - maskSizeWidth1/2" :rotate="rotate" :scale="scale" @change="change"></liu-picture-composition>
+			:height="imgHeight" :dWidth="imgWidth" :dHeight="imgHeight" :radioFun="getRatioFun" :maskList="maskOptList"
+			:x="0" :y="0" :dx="0" :dy="0" :rotate="rotate" :scale="scale" @change="change"></liu-picture-composition>
 
 		<view class="choose">
 			<view class="flex-col section" v-if="step == 0">
 				<view class="flex-row items-center biaoti">
 					<view class="green_spot"></view>
-					<text class="font_step">Step 1 / Choose Pic & Frame</text>
+					<text class="font_step">Step 1 / Choose Frame</text>
 				</view>
 				<scroll-view class="scroll" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
 					<view class="group">
 
 						<view :class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg(item,index,'endlong')" class="item" v-for="(item,index) in imgList0" :key="index">
+							@click="selectImg(item,index,'endlong')" class="item" v-for="(item,index) in imgsList0"
+							:key="index">
 							<image class="frame_1" mode="widthFix" :src="item" />
 						</view>
 
 
 						<view :class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg(item,index, 'across')" class="item" v-for="(item,index) in imgList1" :key="index">
+							@click="selectImg(item,index, 'across')" class="item" v-for="(item,index) in imgsList1"
+							:key="index">
 							<image class="frame_2" mode="widthFix" :src="item" />
 						</view>
 
 					</view>
 				</scroll-view>
 				<view class="flex-row group_6 mt-27">
-					<view class="flex-col items-center button text-wrapper_3" @click="onChooseAvatar">
-						<text class="button_font">Choose a Pic</text>
-					</view>
-					<view class="ml-16 flex-col items-center button text-wrapper_4" @click="nextStep1()">
+
+					<view class="ml-16 flex-col items-center button_0 text-wrapper_4"
+						:class="nextState ? 'text-wrapper_4_bg2' : 'text-wrapper_4_bg1'" @click="nextStep1()">
 						<text class="button_font" style="color: white;">Next</text>
 					</view>
 				</view>
 			</view>
-			<view class="flex-col section" v-if="step == 1">
+			<view class="flex-col section" v-if="step === 1">
 				<view class="flex-row items-center biaoti">
 					<view class="green_spot" style="background-color: #F98109;"></view>
-					<text class="font_step">Step 2 / Add Sticker</text>
+					<text class="font_step">Step 2 / Choose Pic</text>
+				</view>
+				<view>
+					<image class = "image_choose_pic items-center" src="https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/select-pic_button.png"  alt="Choose Pic" @click="onChooseAvatar">
+				</view>
+				
+				<view class="flex-row group_6 mt-27">
+					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack">
+						<text class="button_font">Back</text>
+					</view>
+					
+<!-- 					<view class="flex-col items-center button text-wrapper_3" @click="onChooseAvatar">
+						<text class="button_font">Choose a Pic</text>
+					</view> -->
+					
+					<view class="ml-16 flex-col items-center button text-wrapper_4"
+						:class="nextState ? 'text-wrapper_4_bg1' : 'text-wrapper_4_bg2'" @click="nextStep2()">
+						<text class="button_font" style="color: white;">Next</text>
+					</view>
+				</view>
+			</view>
+
+			<view class="flex-col section" v-if="step == 2">
+				<view class="flex-row items-center biaoti">
+					<view class="green_spot" style="background-color: #F98109;"></view>
+					<text class="font_step">Step 3 / Add Sticker</text>
 				</view>
 				<scroll-view class="scroll" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
 					<view class="group">
-						<view :class="imgSelectIndex1 == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgList2" :key="index">
+						<view :class="getMaskOptKey.indexOf(index) > -1 ? 'selectedClass' : 'selectedClassDefault'"
+							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgsList2" :key="index">
 							<image class="frame_2" mode="widthFix" :src="item" />
 						</view>
 					</view>
 				</scroll-view>
 				<view class="flex-row group_6 mt-27">
-					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack">
+					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack1">
 						<text class="button_font">Back</text>
 					</view>
-					<view class="ml-16 flex-col items-center button text-wrapper_5" @click="compositionUrl()">
+					<view class="ml-16 flex-col items-center button text-wrapper_5"
+						:class="maskOptList.length > 0 ? 'text-wrapper_5_bg1' : 'text-wrapper_5_bg2'"
+						@click="compositionUrl()">
 						<text class="button_font" style="color: white;">Generate</text>
 					</view>
 				</view>
 			</view>
 		</view>
 
-		<ksp-cropper mode="free" :width="imgWidth" :height="imgHeight" :maxWidth="1024" :maxHeight="1024" :url="url"
+		<ksp-cropper mode="fixed" :width="modeWidth" :height="modeHeight" :maxWidth="1024" :maxHeight="1024" :url="url"
 			@cancel="oncancel" @ok="onok"></ksp-cropper>
 
 
@@ -127,11 +165,13 @@
 
 <script>
 	const list = {}
+	var _self = null
 	export default {
 		data() {
 			return {
+				cropAspectRatio: '10:5',
 				bgUrl: 'https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/logo-back.png', //背景图片
-				photoUrl: 'https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/frame2.png', //头像图片
+				photoUrl: '', //头像图片
 				gsUrl: "",
 
 				url: "",
@@ -153,6 +193,7 @@
 				imgurl1: "",
 				showBorder: false,
 				showBorder1: false,
+
 
 				maskSize: 0,
 				maskCenterX: wx.getSystemInfoSync().windowWidth / 2,
@@ -192,6 +233,7 @@
 				imgList: [],
 				imgSelectIndex: null,
 				imgList0: [
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2080.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2085.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2086.png",
@@ -199,13 +241,32 @@
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2090.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2091.png",
 				],
+				imgsList0: [
+					"/static/image/frame/Group1.png",
+					"/static/image/frame/Group2.png",
+					"/static/image/frame/Group3.png",
+					"/static/image/frame/Group4.png",
+					"/static/image/frame/Group5.png",
+					"/static/image/frame/Group6.png",
+					"/static/image/frame/Group7.png",
+				],
 				imgList1: [
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none2.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2081.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2082.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2083.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2084.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2087.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2088.png",
+				],
+				imgsList1: [
+					"/static/image/frame/Group8.png",
+					"/static/image/frame/Group9.png",
+					"/static/image/frame/Group10.png",
+					"/static/image/frame/Group11.png",
+					"/static/image/frame/Group12.png",
+					"/static/image/frame/Group13.png",
+					"/static/image/frame/Group14.png",
 				],
 				imgSelectIndex1: null,
 				imgList2: [
@@ -234,10 +295,32 @@
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s23.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s24.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s25.png",
-				]
+				],
+				imgsList2: [
+					"/static/image/pic/pic1.png",
+					"/static/image/pic/pic2.png",
+				],
+				maskOptList: [],
 			}
 		},
 		computed: {
+			getMaskOptKey() {
+				return this.maskOptList.map(item => item.key)
+			},
+			modeWidth() {
+				let width = 575;
+				if (this.type !== 'endlong') {
+					width = 767;
+				}
+				return width;
+			},
+			modeHeight() {
+				let height = 767;
+				if (this.type !== 'endlong') {
+					height = 575;
+				}
+				return height;
+			},
 			maskPic: function() {
 				var pic = this.imgurl;
 				console.log(pic)
@@ -247,10 +330,18 @@
 				var pic = this.imgurl1;
 				console.log(pic)
 				return pic;
+			},
+			nextState() {
+				let state = false;
+				if (this.avatarPath != null) {
+					state = true;
+				}
+				return state
 			}
 		},
 		onLoad(option) {
-			let _this = this;
+			_self = this
+			this.initial = {}
 			this.windowHeight = getApp().globalData.windowHeight;
 			console.log("=======", this.maskSizeHeight)
 			this.img_h = this.windowHeight - 237 - 30
@@ -260,11 +351,14 @@
 			this.maskSizeHeight = maxWidth * 653 / 489
 			this.maskSizeWidth = maxWidth
 
-			this.imgSelectIndex = 0
-			this.selectImg(this.imgList1[this.imgSelectIndex], this.imgSelectIndex)
+			this.imgSelectIndex = null
+			// this.selectImg(this.imgList1[this.imgSelectIndex], this.imgSelectIndex)
 		},
 		methods: {
-			//节流
+			getRatioFun(val, item) {
+				let ratio = _self.imgWidth / uni.upx2px(513)
+				return ratio * val
+			},
 			throttle(func, wait) {
 				let lastTime = 0;
 				return function(...args) {
@@ -276,16 +370,23 @@
 				};
 			},
 			compositionUrl() {
-				// 
 				this.$nextTick(res => {
 					this.$refs.picRef.getNewUrl()
-					console.log(this.$refs.picRef.getNewUrl(), '//');
 				})
 			},
 			change(e) {
-				this.throttle(this.handleSkip(e), 100)
+				console.log("实际上1", e);
+				this.throttle(this.handleSkip(e), 500)
 			},
 			handleSkip(e) {
+				if (this.maskOptList.length < 1) {
+					uni.showToast({
+						title: 'choose tags',
+						duration: 2000,
+						icon: "none"
+					})
+					return
+				}
 				let _this = this;
 				const tempFilePath = e; // 替换为实际的临时文件路径
 				uni.navigateTo({
@@ -310,8 +411,31 @@
 						// this.avatarPath = res.tempFilePaths[0];
 					}
 				});
+				// let _this = this;
+				// uni.chooseImage({
+				// 	count: 1, // 默认选择一张图片
+				// 	sizeType: ['original', 'compressed'], // 可以选择原图或压缩图
+				// 	sourceType: ['album', 'camera'], // 可以从相册选择或使用相机拍摄
+				// 	success: function(chooseImageRes) {
+				// 		const tempFilePaths = chooseImageRes.tempFilePaths;
+				// 		uni.cropImage({
+				// 			src: tempFilePaths[0], // 图片路径
+				// 			destWidth: 300, // 裁剪后的宽度
+				// 			destHeight: 300, // 裁剪后的高度
+				// 			quality: 1, // 裁剪后的图片质量
+				// 			success: function(cropImageRes) {
+				// 				_this.url = cropImageRes.tempFilePath
+				// 				console.log('裁剪后的图片路径：' + cropImageRes.tempFilePath);
+				// 			},
+				// 			fail: function(err) {
+				// 				console.error('裁剪失败：' + err.errMsg);
+				// 			}
+				// 		});
+				// 	}
+				// });
 			},
 			onok(ev) {
+				console.log("事件触发");
 				this.url = "";
 
 				this.path = ev.path;
@@ -329,6 +453,12 @@
 				this.gsUrl = null
 				this.imgSelectIndex1 = null
 			},
+			nextStepBack1() {
+				this.step = 1
+				this.showBorder = false
+				this.gsUrl = null
+				this.imgSelectIndex1 = null
+			},
 			selectImg(item, index, type) {
 				this.type = type || 'endlong';
 				console.log(item, index)
@@ -336,7 +466,14 @@
 				// this.changeMask()
 				this.imgSelectIndex = index
 				let self = this;
-				var url = item
+				var url = null
+				console.log(type);
+				if(type == "endlong") {
+					url = self.imgList0[index];
+				} else {
+					url = self.imgList1[index];
+				}
+				console.log(url);
 				uni.getImageInfo({
 					src: url,
 					success(res) {
@@ -386,48 +523,75 @@
 			},
 			selectImg1(item, index) {
 				console.log(item)
+				let indx = this.maskOptList.findIndex(val => val.key === index)
+				if (indx > -1) {
+					this.maskOptList.splice(indx)
+					return false;
+				}
 				this.imgSelectIndex1 = index
 				let self = this;
-				var url = item
+				var url = self.imgList2[index];
 
 				uni.getImageInfo({
 					src: url,
 					success(res) {
 						console.log('-----res--', res)
 						var maxWidth = 80;
-						self.maskSize = res.width
-						self.maskSizeHeight1 = maxWidth * res.height / res.width
-						self.maskSizeWidth1 = maxWidth
-
-
+						self.maskOptList.forEach(v => v.edit = false)
+						self.maskOptList.push({
+							key: index,
+							centerX: uni.upx2px(513) / 2,
+							centerY: 100,
+							width: maxWidth,
+							height: maxWidth * res.height / res.width,
+							scale: 1,
+							rotate: 0,
+							rotateY: 0,
+							url: res.path,
+							edit: true
+						})
 					}
 				})
-				uni.downloadFile({
-					url: url,
-					success: function(res) {
-						console.log("+++++", res);
-						// self.imgurl1 = res.tempFilePath
-						self.gsUrl = res.tempFilePath
-					},
-					fail: function(e) {}
-				})
+				// uni.downloadFile({
+				// 	url: url,
+				// 	success: function(res) {
+				// 		console.log("+++++", res);
+				// 		// self.imgurl1 = res.tempFilePath
+				// 		self.gsUrl = res.tempFilePath
+				// 	},
+				// 	fail: function(e) {}
+				// })
 			},
-			closeGuashi() {
-				this.gsUrl = null
-				this.imgSelectIndex1 = null
-				this.showBorder = false
+			closeGuashi(index) {
+				console.log(index);
+				this.maskOptList.splice(index, 1)
 			},
 			touchAvatarBg() {
 				this.showBorder = false;
 				this.showBorder1 = false
 			},
 			touchStart(e) {
-				console.log('e.target.id', e.target.id);
-				if (e.target.id == "mask") {
+				console.log('e.target.id', e.target);
+				this.maskOptList.forEach(v => {
+					if (`mask_${v.key}` == e.target.dataset.key) {
+						v.edit = true
+					} else {
+						v.edit = false
+					}
+				})
+				if (e.target.id.indexOf("mask") > -1) {
 					this.touch_target = "mask";
 					this.showBorder = true;
 				} else if (e.target.id == "handle") {
 					this.touch_target = "handle"
+					let item = this.maskOptList.find(item => item.edit)
+					this.initial = {
+						initialX: item.centerX,
+						initialY: item.centerY,
+						initialH: item.height,
+						initialW: item.width,
+						initialRotate: item.rotate
+					}
 				} else {
 					this.touch_target = ""
 				};
@@ -442,34 +606,100 @@
 				var current_y = e.touches[0].clientY;
 				var moved_x = current_x - this.start_x;
 				var moved_y = current_y - this.start_y;
-				if (this.touch_target == "mask") {
-					this.maskCenterX = this.maskCenterX + moved_x;
-					this.maskCenterY = this.maskCenterY + moved_y;
-					this.cancelCenterX = this.cancelCenterX + moved_x;
-					this.cancelCenterY = this.cancelCenterY + moved_y;
-					this.handleCenterX = this.handleCenterX + moved_x;
-					this.handleCenterY = this.handleCenterY + moved_y;
+				let maxX = uni.upx2px(513)
+				let maxY = maxX * this.imgHeight / this.imgWidth
+				if (this.touch_target.indexOf("mask") > -1) {
+					let item = this.maskOptList.find(item => item.edit)
+					let x = item.centerX + moved_x
+					let y = item.centerY + moved_y
+
+					if (x < item.width / 2) {
+						x = item.width / 2
+					}
+					if (x > maxX - item.width / 2) {
+						x = maxX - item.width / 2
+					}
+
+					if (y < item.height / 2) {
+						y = item.height / 2
+					}
+					if (y > maxY - item.height / 2) {
+						y = maxY - item.height / 2
+					}
+
+					item.centerX = x
+					item.centerY = y
+					// console.log(item);
+
+					// this.maskCenterX = this.maskCenterX + moved_x;
+					// this.maskCenterY = this.maskCenterY + moved_y;
+					// this.cancelCenterX = this.cancelCenterX + moved_x;
+					// this.cancelCenterY = this.cancelCenterY + moved_y;
+					// this.handleCenterX = this.handleCenterX + moved_x;
+					// this.handleCenterY = this.handleCenterY + moved_y;
+					this.start_x = current_x;
+					this.start_y = current_y;
 				};
 				if (this.touch_target == "handle") {
-					this.handleCenterX = this.handleCenterX + moved_x;
-					this.handleCenterY = this.handleCenterY + moved_y;
-					this.cancelCenterX = 2 * this.maskCenterX - this.handleCenterX;
-					this.cancelCenterY = 2 * this.maskCenterY - this.handleCenterY;
-					let diff_x_before = this.handle_center_x - this.mask_center_x;
-					let diff_y_before = this.handle_center_y - this.mask_center_y;
-					let diff_x_after = this.handleCenterX - this.mask_center_x;
-					let diff_y_after = this.handleCenterY - this.mask_center_y;
-					let distance_before = Math.sqrt(diff_x_before * diff_x_before + diff_y_before * diff_y_before);
-					let distance_after = Math.sqrt(diff_x_after * diff_x_after + diff_y_after * diff_y_after);
-					let angle_before = Math.atan2(diff_y_before, diff_x_before) / Math.PI * 180;
-					let angle_after = Math.atan2(diff_y_after, diff_x_after) / Math.PI * 180;
-					this.scale = distance_after / distance_before * this.scaleCurrent;
-					this.rotate = angle_after - angle_before + this.rotateCurrent;
+					// 计算点到中心点的角度
+					const {
+						initialX,
+						initialY,
+						initialRotate
+					} = this.initial
+					let item = this.maskOptList.find(item => item.edit)
+					let {
+						centerX,
+						centerY
+					} = item
+					const angleBefore = Math.atan2(this.start_y - centerY, this.start_x - centerX) / Math.PI * 180;
+					const angleAfter = Math.atan2(current_y - centerY, current_x - centerX) / Math.PI * 180;
+					// 旋转的角度
+					item.rotate = initialRotate + angleAfter - angleBefore
+
+					//缩放部分
+					const {
+						initialH,
+						initialW
+					} = this.initial
+					//用勾股定理算出距离
+					let lineA = Math.sqrt(Math.pow(centerX - this.start_x, 2) + Math.pow(centerY - this.start_y, 2));
+					let lineB = Math.sqrt(Math.pow(centerX - current_x, 2) + Math.pow(centerY - current_y, 2));
+					let w = initialW + (lineB - lineA);
+					//由于是等比缩放，所以乘一个宽高比例。
+					let h = initialH + (lineB - lineA) * (initialH / initialW);
+					//定义最大宽高
+					item.width = w >= initialW * 2 ? initialW * 2 : w;
+					item.height = h >= initialH * 2 ? initialH * 2 : h;
+
+					if (w < initialW * 2 && h < initialH * 2) {
+						// 放大 或 缩小
+						item.x = initialX - (lineB - lineA) / 2;
+						item.y = initialY - (lineB - lineA) / 2;
+					}
+
+
+
+
+					// this.handleCenterX = this.handleCenterX + moved_x;
+					// this.handleCenterY = this.handleCenterY + moved_y;
+					// this.cancelCenterX = 2 * this.maskCenterX - this.handleCenterX;
+					// this.cancelCenterY = 2 * this.maskCenterY - this.handleCenterY;
+					// let diff_x_before = this.handle_center_x - this.mask_center_x;
+					// let diff_y_before = this.handle_center_y - this.mask_center_y;
+					// let diff_x_after = this.handleCenterX - this.mask_center_x;
+					// let diff_y_after = this.handleCenterY - this.mask_center_y;
+					// let distance_before = Math.sqrt(diff_x_before * diff_x_before + diff_y_before * diff_y_before);
+					// let distance_after = Math.sqrt(diff_x_after * diff_x_after + diff_y_after * diff_y_after);
+					// let angle_before = Math.atan2(diff_y_before, diff_x_before) / Math.PI * 180;
+					// let angle_after = Math.atan2(diff_y_after, diff_x_after) / Math.PI * 180;
+					// this.scale = distance_after / distance_before * this.scaleCurrent;
+					// this.rotate = angle_after - angle_before + this.rotateCurrent;
 				}
-				this.start_x = current_x;
-				this.start_y = current_y;
+
 			},
 			touchEnd(e) {
+				console.log(e);
 				this.mask_center_x = this.maskCenterX;
 				this.mask_center_y = this.maskCenterY;
 				this.cancel_center_x = this.cancelCenterX;
@@ -482,6 +712,17 @@
 
 				console.log("----x", this.cancel_center_x)
 				console.log("----y", this.cancel_center_y)
+			},
+			getRotationAngle(centerX, centerY, x, y) {
+				// 计算点到中心点的角度
+				let angle = Math.atan2(y - centerY, x - centerX) * 180 / Math.PI;
+
+				// 转换为正角度
+				// if (angle < 0) {
+				//     angle += 360;
+				// }
+
+				return angle;
 			},
 			// 选择挂件
 			changeMask() {
@@ -508,6 +749,19 @@
 					})
 					return
 				}
+				// if (this.avatarPath == null) {
+				// 	uni.showToast({
+				// 		title: 'choose pic',
+				// 		duration: 2000,
+				// 		icon: "none"
+				// 	})
+				// 	return
+				// }
+				this.nextState = true;
+				this.step = 1
+				this.showBorder = false;
+			},
+			nextStep2() {
 				if (this.avatarPath == null) {
 					uni.showToast({
 						title: 'choose pic',
@@ -516,7 +770,8 @@
 					})
 					return
 				}
-				this.step = 1
+				this.nextState = true;
+				this.step = 2
 				this.showBorder = false;
 			},
 			// 绘制头像
@@ -728,6 +983,11 @@
 			margin-left: 30rpx;
 		}
 	}
+	
+		
+	.biaoti2 {
+		margin-bottom: 262rpx;
+	}
 
 	.green_spot {
 		background-color: #8fc31f;
@@ -752,6 +1012,7 @@
 
 	.frame_2 {
 		top: 24rpx;
+		width: 60%;
 		// width: 170rpx;
 		// height: 128rpx;
 		object-fit: contain;
@@ -770,17 +1031,19 @@
 			background: #E3E3E3;
 			display: inline-block;
 			margin: 10rpx;
+			flex: 0 0 auto;
+
 			// display: flex;
 			//   justify-content: center;
 			//   align-items: center;
-			  // background-color: #f0f0f0;
-			  // overflow: hidden;
-			  // position: relative;
-				.image {
-					width: 100%;
-					height: 100%;
-					object-fit: contain; 
-				}
+			// background-color: #f0f0f0;
+			// overflow: hidden;
+			// position: relative;
+			.image {
+				width: 80%;
+				height: 80%;
+				object-fit: contain;
+			}
 		}
 
 		.group {
@@ -824,7 +1087,7 @@
 	}
 
 	.mt-27 {
-		margin-top: 51.53rpx;
+		margin-top: 24rpx;
 	}
 
 	.button {
@@ -852,19 +1115,33 @@
 	.text-wrapper_4 {
 		margin-left: 30rpx;
 		padding: 30.53rpx 0;
-		background-color: #8FC31E;
 		color: #fff;
 		border-radius: 57.25rpx;
 		height: 89.69rpx;
 	}
 
+	.text-wrapper_4_bg1 {
+		background-color: #8FC31E;
+	}
+
+	.text-wrapper_4_bg2 {
+		background-color: #dddfe2;
+	}
+
 	.text-wrapper_5 {
 		margin-left: 30rpx;
 		padding: 30.53rpx 0;
-		background-color: #F98109;
 		color: #fff;
 		border-radius: 57.25rpx;
 		height: 89.69rpx;
+	}
+
+	.text-wrapper_5_bg1 {
+		background-color: #F98109;
+	}
+
+	.text-wrapper_5_bg2 {
+		background-color: #dddfe2;
 	}
 
 	.avatar-container {
@@ -907,7 +1184,7 @@
 	}
 
 	.avatar-bg {
-		background: white;
+		background: #e5e5e5;
 		// position: absolute;
 		// z-index: 0;
 		// height: 482px;
@@ -965,6 +1242,23 @@
 		// background-color: red;
 	}
 
+	.m-mask-item {
+		position: absolute;
+		top: 50rpx;
+		border: 3px solid rgba(255, 255, 255, 0.0);
+
+		.m-mask-view {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+
+		image {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
 	.mask1 {
 		height: 100px;
 		width: 100px;
@@ -983,9 +1277,9 @@
 
 	.circle {
 		border-radius: 50%;
-		font-size: 15px;
+		font-size: 35rpx;
 		color: #000;
-		line-height: 25px;
+		line-height: 55rpx;
 		text-align: center;
 		background: #fff;
 	}
@@ -994,8 +1288,8 @@
 	.cancel {
 		position: absolute;
 		z-index: 1;
-		width: 25px;
-		height: 25px;
+		width: 55rpx;
+		height: 55rpx;
 		background-color: white;
 		color: black;
 	}
@@ -1183,5 +1477,14 @@
 
 	.selClass {
 		border: 1rpx solid #ff4c4c;
+	}
+	.button_0 {
+		width: 600rpx;
+	}
+	.image_choose_pic {
+		justify-content: center;
+		height: 182rpx;
+		width: 679rpx;
+		margin-right: 24px;
 	}
 </style>

@@ -43,13 +43,14 @@
 					:style="{ width: item.width+'px',height: item.height+'px',
 				top: item.centerY - item.height/2+'px', left: item.centerX - item.width/2+'px', transform: 'rotate(' +item.rotate+ 'deg)' + 'scale(' +item.scale+')' + 'rotateY('+ item.rotateY +'deg)'}">
 					<view class="m-mask-view">
-						<image :src="item.url" mode="" :id="`mask_${item.key}`" :data-key="`mask_${item.key}`" :data-index="index">
+						<image :src="item.url" mode="" :id="`mask_${item.key}`" :data-key="`mask_${item.key}`"
+							:data-index="index">
 						</image>
 						<text @touchstart.stop="closeGuashi(index)" class="cuIcon-close handle circle"
 							:class="{hideHandle: !item.edit}" id="handle" :data-key="`mask_${item.key}`"
 							:style="{top: 0  + 'px', left:'0px'}"></text>
-						<text class="cuIcon-full handle circle" :class="{hideHandle: !item.edit}" :data-key="`mask_${item.key}`"
-							id="handle" :style="{bottom:0+ 'px', right:'0px'}"></text>
+						<text class="cuIcon-full handle circle" :class="{hideHandle: !item.edit}"
+							:data-key="`mask_${item.key}`" id="handle" :style="{top:0+ 'px', right:'0px'}"></text>
 					</view>
 				</view>
 
@@ -60,9 +61,7 @@
 		</view>
 		<view class="watermark">
 			<text class="watermark1">
-				{{step < 1 ? "Please choose a picture" : "Use two fingers to drag & zoom-in/out"}}
-
-				<!-- <text class="watermark1-content">Graduation</text> -->
+				{{step === 0 ? "Please choose a frame" : step === 1 ? "Click here to choose pic" : "Use two fingers to drag & zoom-in/out"}}
 			</text>
 			<view class="watermark2">
 				Graduation
@@ -70,67 +69,93 @@
 		</view>
 
 		<liu-picture-composition ref="picRef" :bgUrl="bgUrl" :photoUrl="photoUrl" :guashiUrl="gsUrl" :width="imgWidth"
-			:height="imgHeight" :dWidth="imgWidth" :dHeight="imgHeight" :radioFun="getRatioFun" :maskList="maskOptList" :x="0"
-			:y="0" :dx="0" :dy="0" :rotate="rotate" :scale="scale" @change="change"></liu-picture-composition>
+			:height="imgHeight" :dWidth="imgWidth" :dHeight="imgHeight" :radioFun="getRatioFun" :maskList="maskOptList"
+			:x="0" :y="0" :dx="0" :dy="0" :rotate="rotate" :scale="scale" @change="change"></liu-picture-composition>
 
 		<view class="choose">
 			<view class="flex-col section" v-if="step == 0">
 				<view class="flex-row items-center biaoti">
 					<view class="green_spot"></view>
-					<text class="font_step">Step 1 / Choose Pic & Frame</text>
+					<text class="font_step">Step 1 / Choose Frame</text>
 				</view>
 				<scroll-view class="scroll" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
 					<view class="group">
 
 						<view :class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg(item,index,'endlong')" class="item" v-for="(item,index) in imgList0" :key="index">
+							@click="selectImg(item,index,'endlong')" class="item" v-for="(item,index) in imgsList0"
+							:key="index">
 							<image class="frame_1" mode="widthFix" :src="item" />
 						</view>
 
 
 						<view :class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg(item,index, 'across')" class="item" v-for="(item,index) in imgList1" :key="index">
+							@click="selectImg(item,index, 'across')" class="item" v-for="(item,index) in imgsList1"
+							:key="index">
 							<image class="frame_2" mode="widthFix" :src="item" />
 						</view>
 
 					</view>
 				</scroll-view>
 				<view class="flex-row group_6 mt-27">
-					<view class="flex-col items-center button text-wrapper_3" @click="onChooseAvatar">
-						<text class="button_font">Choose a Pic</text>
-					</view>
-					<view class="ml-16 flex-col items-center button text-wrapper_4"
-						:class="nextState ? 'text-wrapper_4_bg1' : 'text-wrapper_4_bg2'" @click="nextStep1()">
+
+					<view class="ml-16 flex-col items-center button_0 text-wrapper_4"
+						:class="nextState ? 'text-wrapper_4_bg2' : 'text-wrapper_4_bg1'" @click="nextStep1()">
 						<text class="button_font" style="color: white;">Next</text>
 					</view>
 				</view>
 			</view>
-			<view class="flex-col section" v-if="step == 1">
+			<view class="flex-col section" v-if="step === 1">
 				<view class="flex-row items-center biaoti">
 					<view class="green_spot" style="background-color: #F98109;"></view>
-					<text class="font_step">Step 2 / Add Sticker</text>
+					<text class="font_step">Step 2 / Choose Pic</text>
+				</view>
+				<view>
+					<image class = "image_choose_pic items-center" src="https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/select-pic_button.png"  alt="Choose Pic" @click="onChooseAvatar">
+				</view>
+				
+				<view class="flex-row group_6 mt-27">
+					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack">
+						<text class="button_font">Back</text>
+					</view>
+					
+<!-- 					<view class="flex-col items-center button text-wrapper_3" @click="onChooseAvatar">
+						<text class="button_font">Choose a Pic</text>
+					</view> -->
+					
+					<view class="ml-16 flex-col items-center button text-wrapper_4"
+						:class="nextState ? 'text-wrapper_4_bg1' : 'text-wrapper_4_bg2'" @click="nextStep2()">
+						<text class="button_font" style="color: white;">Next</text>
+					</view>
+				</view>
+			</view>
+
+			<view class="flex-col section" v-if="step == 2">
+				<view class="flex-row items-center biaoti">
+					<view class="green_spot" style="background-color: #F98109;"></view>
+					<text class="font_step">Step 3 / Add Sticker</text>
 				</view>
 				<scroll-view class="scroll" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
 					<view class="group">
 						<view :class="getMaskOptKey.indexOf(index) > -1 ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgList2" :key="index">
+							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgsList2" :key="index">
 							<image class="frame_2" mode="widthFix" :src="item" />
 						</view>
 					</view>
 				</scroll-view>
 				<view class="flex-row group_6 mt-27">
-					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack">
+					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack1">
 						<text class="button_font">Back</text>
 					</view>
 					<view class="ml-16 flex-col items-center button text-wrapper_5"
-						:class="maskOptList.length > 0 ? 'text-wrapper_5_bg1' : 'text-wrapper_5_bg2'" @click="compositionUrl()">
+						:class="maskOptList.length > 0 ? 'text-wrapper_5_bg1' : 'text-wrapper_5_bg2'"
+						@click="compositionUrl()">
 						<text class="button_font" style="color: white;">Generate</text>
 					</view>
 				</view>
 			</view>
 		</view>
 
-		<ksp-cropper mode="fixed"  :width="modeWidth" :height="modeHeight" :maxWidth="1024" :maxHeight="1024" :url="url"
+		<ksp-cropper mode="fixed" :width="modeWidth" :height="modeHeight" :maxWidth="1024" :maxHeight="1024" :url="url"
 			@cancel="oncancel" @ok="onok"></ksp-cropper>
 
 
@@ -168,7 +193,7 @@
 				imgurl1: "",
 				showBorder: false,
 				showBorder1: false,
-				
+
 
 				maskSize: 0,
 				maskCenterX: wx.getSystemInfoSync().windowWidth / 2,
@@ -208,6 +233,7 @@
 				imgList: [],
 				imgSelectIndex: null,
 				imgList0: [
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2080.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2085.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2086.png",
@@ -215,13 +241,32 @@
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2090.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2091.png",
 				],
+				imgsList0: [
+					"/static/image/frame/Group1.png",
+					"/static/image/frame/Group2.png",
+					"/static/image/frame/Group3.png",
+					"/static/image/frame/Group4.png",
+					"/static/image/frame/Group5.png",
+					"/static/image/frame/Group6.png",
+					"/static/image/frame/Group7.png",
+				],
 				imgList1: [
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none2.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2081.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2082.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2083.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2084.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2087.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2088.png",
+				],
+				imgsList1: [
+					"/static/image/frame/Group8.png",
+					"/static/image/frame/Group9.png",
+					"/static/image/frame/Group10.png",
+					"/static/image/frame/Group11.png",
+					"/static/image/frame/Group12.png",
+					"/static/image/frame/Group13.png",
+					"/static/image/frame/Group14.png",
 				],
 				imgSelectIndex1: null,
 				imgList2: [
@@ -251,6 +296,10 @@
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s24.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s25.png",
 				],
+				imgsList2: [
+					"/static/image/pic/pic1.png",
+					"/static/image/pic/pic2.png",
+				],
 				maskOptList: [],
 			}
 		},
@@ -260,14 +309,14 @@
 			},
 			modeWidth() {
 				let width = 575;
-				if(this.type !== 'endlong') {
+				if (this.type !== 'endlong') {
 					width = 767;
 				}
 				return width;
 			},
 			modeHeight() {
 				let height = 767;
-				if(this.type !== 'endlong') {
+				if (this.type !== 'endlong') {
 					height = 575;
 				}
 				return height;
@@ -302,7 +351,7 @@
 			this.maskSizeHeight = maxWidth * 653 / 489
 			this.maskSizeWidth = maxWidth
 
-			this.imgSelectIndex = 0
+			this.imgSelectIndex = null
 			// this.selectImg(this.imgList1[this.imgSelectIndex], this.imgSelectIndex)
 		},
 		methods: {
@@ -404,6 +453,12 @@
 				this.gsUrl = null
 				this.imgSelectIndex1 = null
 			},
+			nextStepBack1() {
+				this.step = 1
+				this.showBorder = false
+				this.gsUrl = null
+				this.imgSelectIndex1 = null
+			},
 			selectImg(item, index, type) {
 				this.type = type || 'endlong';
 				console.log(item, index)
@@ -411,7 +466,14 @@
 				// this.changeMask()
 				this.imgSelectIndex = index
 				let self = this;
-				var url = item
+				var url = null
+				console.log(type);
+				if(type == "endlong") {
+					url = self.imgList0[index];
+				} else {
+					url = self.imgList1[index];
+				}
+				console.log(url);
 				uni.getImageInfo({
 					src: url,
 					success(res) {
@@ -468,7 +530,7 @@
 				}
 				this.imgSelectIndex1 = index
 				let self = this;
-				var url = item
+				var url = self.imgList2[index];
 
 				uni.getImageInfo({
 					src: url,
@@ -607,15 +669,15 @@
 					//由于是等比缩放，所以乘一个宽高比例。
 					let h = initialH + (lineB - lineA) * (initialH / initialW);
 					//定义最大宽高
-					item.width = w >= initialW*2? initialW*2 : w;
-					item.height = h >= initialH*2 ? initialH*2 : h;
-					
-					if (w < initialW*2 && h < initialH*2) {
+					item.width = w >= initialW * 2 ? initialW * 2 : w;
+					item.height = h >= initialH * 2 ? initialH * 2 : h;
+
+					if (w < initialW * 2 && h < initialH * 2) {
 						// 放大 或 缩小
 						item.x = initialX - (lineB - lineA) / 2;
 						item.y = initialY - (lineB - lineA) / 2;
 					}
-					
+
 
 
 
@@ -679,14 +741,27 @@
 				this.showBorder = true;
 			},
 			nextStep1() {
-				// if (this.imgSelectIndex == null) {
+				if (this.imgSelectIndex == null) {
+					uni.showToast({
+						title: 'choose frame',
+						duration: 2000,
+						icon: "none"
+					})
+					return
+				}
+				// if (this.avatarPath == null) {
 				// 	uni.showToast({
-				// 		title: 'choose frame',
+				// 		title: 'choose pic',
 				// 		duration: 2000,
 				// 		icon: "none"
 				// 	})
 				// 	return
 				// }
+				this.nextState = true;
+				this.step = 1
+				this.showBorder = false;
+			},
+			nextStep2() {
 				if (this.avatarPath == null) {
 					uni.showToast({
 						title: 'choose pic',
@@ -696,7 +771,7 @@
 					return
 				}
 				this.nextState = true;
-				this.step = 1
+				this.step = 2
 				this.showBorder = false;
 			},
 			// 绘制头像
@@ -908,6 +983,11 @@
 			margin-left: 30rpx;
 		}
 	}
+	
+		
+	.biaoti2 {
+		margin-bottom: 262rpx;
+	}
 
 	.green_spot {
 		background-color: #8fc31f;
@@ -1007,7 +1087,7 @@
 	}
 
 	.mt-27 {
-		margin-top: 51.53rpx;
+		margin-top: 24rpx;
 	}
 
 	.button {
@@ -1397,5 +1477,14 @@
 
 	.selClass {
 		border: 1rpx solid #ff4c4c;
+	}
+	.button_0 {
+		width: 600rpx;
+	}
+	.image_choose_pic {
+		justify-content: center;
+		height: 182rpx;
+		width: 679rpx;
+		margin-right: 24px;
 	}
 </style>
