@@ -33,36 +33,16 @@
 			console.log(options, "/options");
 			_this.avatarPath = decodeURIComponent(options.path);
 			_this.type = options.type;
-			this.initShare();
 		},
 		onShow() {
 			this.drawCanvas();
-			 this.initShare();
 		},
 		methods: {
-			initShare: function() {
-			    wx.showShareMenu({
-			      withShareTicket: true // 显示分享到朋友圈的按钮
-			    });
-			},
 			NextPic() {
 				uni.navigateTo({
 					url: `/pages/index/index`
 				});
 			},
-			onShareAppMessage(options) {
-			    return {
-			      title: 'UNNC毕业季', // 转发的标题
-			      path: '/pages/entrance/entrance', // 转发的页面路径
-			      imageUrl: '/static/logo.png', // 可以是本地路径或网络图片
-			      success: function(res) {
-			        // 转发成功
-			      },
-			      fail: function(err) {
-			        // 转发失败
-			      }
-			    };
-			  },
 			drawCanvas(withBackground = false) {
 				console.log("Hello drawCanvas!");
 				this.$http.request({
@@ -111,18 +91,39 @@
 
 					// 根据计数位数动态设置x坐标
 					let xPosition = 200 * scale;
-					let WPosition = 192 * scale;
+					let WPosition = 195 * scale;
 					let WPosition2 = 145 * scale;
 					
-					if (this.count >= 10000) {
-					  xPosition = 180 * scale; // 计数在10000以上
-					  WPosition = 172 * scale;
-					  WPosition2 = 125 * scale;
-					} else if (this.count < 1000) {
-					  xPosition = 220 * scale; // 计数在1000以下
-					  WPosition = 215 * scale;
-					  WPosition2 = 165 * scale;
-					  
+					let countValue; // 用于存储转换后的数值
+					
+					// 判断this.count是否为数字，如果是数字则直接使用，否则转换为数字
+					if (typeof this.count === 'number') {
+					  countValue = this.count;
+					} else {
+					  countValue = parseInt(this.count, 10); // 将字符串转换为整数
+					}
+					
+					// countValue = 113;
+					if (countValue >= 10000) {
+					  xPosition = 190 * scale; // 计数在10000以上
+					  WPosition = 185 * scale;
+					  WPosition2 = 155 * scale;
+					} else if (1000 <= countValue < 10000) {
+					  xPosition = 210 * scale; // 计数在1000-10000
+					  WPosition = 205 * scale;
+					  WPosition2 = 135 * scale;
+					} else if (100 <= countValue < 1000) {
+					  xPosition = 230 * scale; // 计数在100-1000
+					  WPosition = 225 * scale;
+					  WPosition2 = 115 * scale;
+					} else if (10 <= countValue < 100) {
+					  xPosition = 250 * scale; // 计数在10-100
+					  WPosition = 245 * scale;
+					  WPosition2 = 95 * scale;
+					} else if (0 <= countValue < 10) {
+					  xPosition = 270 * scale; // 计数在1-10
+					  WPosition = 265 * scale;
+					  WPosition2 = 75 * scale;
 					}
 					// 绘制下面NO.线条元素
 					ctx.setFillStyle('#10263b');
@@ -131,6 +132,7 @@
 					
 					ctx.setFontSize(32 * scale);
 					ctx.setFillStyle('#ffffff');
+					// ctx.fillText(`No. 113`, xPosition, 549 * scale);
 					ctx.fillText(`No. ${this.count}`, xPosition, 549 * scale);
 
 					

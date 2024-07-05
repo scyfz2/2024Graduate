@@ -9,7 +9,7 @@ export default {
     // 发送给朋友
     return {
       title: "快来定制你的专属毕业照吧！", 
-      imageUrl: "/static/share.jpg",
+      imageUrl: "/static/share.png",
 	  path: 'pages/entrance/entrance'
     };
   },
@@ -17,7 +17,7 @@ export default {
     // 分享到朋友圈
     return {
       title: "快来定制你的专属毕业照吧！",
-      imageUrl: "/static/share.jpg",
+      imageUrl: "/static/share.png",
 	  path: 'pages/entrance/entrance'
     };
   },
