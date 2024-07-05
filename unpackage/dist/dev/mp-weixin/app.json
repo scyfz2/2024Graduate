@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/entrance/entrance",
+    "pages/index/index",
+    "pages/preview/index",
+    "pages/share/index",
+    "pages/mine/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "2024",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "permission": {},
+  "usingComponents": {}
+}

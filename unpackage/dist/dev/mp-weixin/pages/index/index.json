@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "UNNC毕业季",
+  "usingComponents": {
+    "liu-picture-composition": "/uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition",
+    "ksp-cropper": "/uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper"
+  }
+}

@@ -1,0 +1,8 @@
+
+.canvas-main.data-v-7a6738dc {
+	position: fixed;
+	z-index: -999999 !important;
+	opacity: 0;
+	top: -5000rpx;
+}
+

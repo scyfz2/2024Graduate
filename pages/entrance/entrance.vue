@@ -68,17 +68,17 @@ export default {
   data() {
     return {};
   },
-  onShareAppMessage: function() {
-  	return {
-  		title: '2024 Summer',
-  		path: 'pages/entrance/entrance'
-  	};
-  },
-  onShareTimeline: function() {
-  	return {
-  		title: '2024 Summer'
-  	};
-  },
+  // onShareAppMessage: function() {
+  // 	return {
+  // 		title: '2024 Summer',
+  // 		path: 'pages/entrance/entrance'
+  // 	};
+  // },
+  // onShareTimeline: function() {
+  // 	return {
+  // 		title: '2024 Summer'
+  // 	};
+  // },
 
   methods: {
 		handleEvent() {

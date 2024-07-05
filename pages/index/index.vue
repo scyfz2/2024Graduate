@@ -82,14 +82,14 @@
 					<view class="group">
 
 						<view :class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg(item,index,'endlong')" class="item" v-for="(item,index) in imgsList0"
+							@click="selectImg(item,index,'endlong')" class="item" v-for="(item,index) in imgList0"
 							:key="index">
 							<image class="frame_1" mode="widthFix" :src="item" />
 						</view>
 
 
 						<view :class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg(item,index, 'across')" class="item" v-for="(item,index) in imgsList1"
+							@click="selectImg(item,index, 'across')" class="item" v-for="(item,index) in imgList1"
 							:key="index">
 							<image class="frame_2" mode="widthFix" :src="item" />
 						</view>
@@ -102,6 +102,7 @@
 						:class="nextState ? 'text-wrapper_4_bg2' : 'text-wrapper_4_bg1'" @click="nextStep1()">
 						<text class="button_font" style="color: white;">Next</text>
 					</view>
+					
 				</view>
 			</view>
 			<view class="flex-col section" v-if="step === 1">
@@ -110,7 +111,7 @@
 					<text class="font_step">Step 2 / Choose Pic</text>
 				</view>
 				<view>
-					<image class = "image_choose_pic items-center" src="https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/select-pic_button.png"  alt="Choose Pic" @click="onChooseAvatar">
+					<image class = "image_choose_pic items-center" src="https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/select-pic_button.png"  alt="Choose Pic" @click="onChooseAvatar" />
 				</view>
 				
 				<view class="flex-row group_6 mt-27">
@@ -233,7 +234,7 @@
 				imgList: [],
 				imgSelectIndex: null,
 				imgList0: [
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none.png",
+					// "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2080.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2085.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2086.png",
@@ -242,7 +243,7 @@
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2091.png",
 				],
 				imgsList0: [
-					"/static/image/frame/Group1.png",
+					// "/static/image/frame/Group1.png",
 					"/static/image/frame/Group2.png",
 					"/static/image/frame/Group3.png",
 					"/static/image/frame/Group4.png",
@@ -251,7 +252,7 @@
 					"/static/image/frame/Group7.png",
 				],
 				imgList1: [
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none2.png",
+					// "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none2.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2081.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2082.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2083.png",
@@ -260,7 +261,7 @@
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2088.png",
 				],
 				imgsList1: [
-					"/static/image/frame/Group8.png",
+					// "/static/image/frame/Group8.png",
 					"/static/image/frame/Group9.png",
 					"/static/image/frame/Group10.png",
 					"/static/image/frame/Group11.png",
@@ -381,7 +382,7 @@
 			handleSkip(e) {
 				if (this.maskOptList.length < 1) {
 					uni.showToast({
-						title: 'choose tags',
+						title: 'choose a sticker',
 						duration: 2000,
 						icon: "none"
 					})
@@ -743,7 +744,7 @@
 			nextStep1() {
 				if (this.imgSelectIndex == null) {
 					uni.showToast({
-						title: 'choose frame',
+						title: 'choose a frame',
 						duration: 2000,
 						icon: "none"
 					})
@@ -764,7 +765,7 @@
 			nextStep2() {
 				if (this.avatarPath == null) {
 					uni.showToast({
-						title: 'choose pic',
+						title: 'choose a pic',
 						duration: 2000,
 						icon: "none"
 					})
