@@ -103,24 +103,24 @@
 					  countValue = parseInt(this.count, 10); // 将字符串转换为整数
 					}
 					
-					// countValue = 113;
-					if (countValue >= 10000) {
+					// countValue = 11;
+					if (countValue > 9999) {
 					  xPosition = 190 * scale; // 计数在10000以上
 					  WPosition = 185 * scale;
 					  WPosition2 = 155 * scale;
-					} else if (1000 <= countValue < 10000) {
+					} else if (countValue > 999) {
 					  xPosition = 210 * scale; // 计数在1000-10000
 					  WPosition = 205 * scale;
 					  WPosition2 = 135 * scale;
-					} else if (100 <= countValue < 1000) {
+					} else if (countValue > 99) {
 					  xPosition = 230 * scale; // 计数在100-1000
 					  WPosition = 225 * scale;
 					  WPosition2 = 115 * scale;
-					} else if (10 <= countValue < 100) {
+					} else if (countValue > 9) {
 					  xPosition = 250 * scale; // 计数在10-100
 					  WPosition = 245 * scale;
 					  WPosition2 = 95 * scale;
-					} else if (0 <= countValue < 10) {
+					} else if (countValue > 0) {
 					  xPosition = 270 * scale; // 计数在1-10
 					  WPosition = 265 * scale;
 					  WPosition2 = 75 * scale;
@@ -132,7 +132,7 @@
 					
 					ctx.setFontSize(32 * scale);
 					ctx.setFillStyle('#ffffff');
-					// ctx.fillText(`No. 113`, xPosition, 549 * scale);
+					// ctx.fillText(`No. 11`, xPosition, 549 * scale);
 					ctx.fillText(`No. ${this.count}`, xPosition, 549 * scale);
 
 					
