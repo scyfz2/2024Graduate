@@ -68,17 +68,17 @@ export default {
   data() {
     return {};
   },
-  onShareAppMessage: function() {
-  	return {
-  		title: '2024 Summer',
-  		path: 'pages/entrance/entrance'
-  	};
-  },
-  onShareTimeline: function() {
-  	return {
-  		title: '2024 Summer'
-  	};
-  },
+  // onShareAppMessage: function() {
+  // 	return {
+  // 		title: '2024 Summer',
+  // 		path: 'pages/entrance/entrance'
+  // 	};
+  // },
+  // onShareTimeline: function() {
+  // 	return {
+  // 		title: '2024 Summer'
+  // 	};
+  // },
 
   methods: {
 		handleEvent() {
@@ -428,7 +428,7 @@ export default {
     opacity: 0.8; /* 可以调整透明度变化，使效果更自然 */
   }
   100% {
-    transform: translateY(100vh) translateX(-10px) rotate(-45deg);
+    transform: translateY(85vh) translateX(-10px) rotate(-45deg);
     opacity: 0;
   }
 }
@@ -444,7 +444,7 @@ export default {
     opacity: 0.8;
   }
   100% {
-    transform: translateY(100vh) translateX(20px) rotate(15deg);
+    transform: translateY(85vh) translateX(20px) rotate(15deg);
     opacity: 0;
   }
 }
@@ -460,7 +460,7 @@ export default {
     opacity: 0.8;
   }
   100% {
-    transform: translateY(90vh) translateX(10px) rotate(5deg);
+    transform: translateY(85vh) translateX(10px) rotate(5deg);
     opacity: 0;
   }
 }
@@ -481,7 +481,7 @@ export default {
     opacity: 0.7;
   }
   100% {
-    transform: translateY(80vh) translateX(30px) rotate(95deg);
+    transform: translateY(85vh) translateX(30px) rotate(95deg);
     opacity: 0;
   }
 }
@@ -501,7 +501,7 @@ export default {
     opacity: 0.7;
   }
   100% {
-    transform: translateY(80vh) translateX(-40px) rotate(45deg);
+    transform: translateY(85vh) translateX(-40px) rotate(45deg);
     opacity: 0;
   }
 }
@@ -521,7 +521,7 @@ export default {
     opacity: 0.7;
   }
   100% {
-    transform: translateY(70vh) translateX(-40px) rotate(75deg);
+    transform: translateY(88vh) translateX(-40px) rotate(75deg);
     opacity: 0;
   }
 }

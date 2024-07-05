@@ -33,16 +33,36 @@
 			console.log(options, "/options");
 			_this.avatarPath = decodeURIComponent(options.path);
 			_this.type = options.type;
+			this.initShare();
 		},
 		onShow() {
 			this.drawCanvas();
+			 this.initShare();
 		},
 		methods: {
+			initShare: function() {
+			    wx.showShareMenu({
+			      withShareTicket: true // 显示分享到朋友圈的按钮
+			    });
+			},
 			NextPic() {
 				uni.navigateTo({
 					url: `/pages/index/index`
 				});
 			},
+			onShareAppMessage(options) {
+			    return {
+			      title: 'UNNC毕业季', // 转发的标题
+			      path: '/pages/entrance/entrance', // 转发的页面路径
+			      imageUrl: '/static/logo.png', // 可以是本地路径或网络图片
+			      success: function(res) {
+			        // 转发成功
+			      },
+			      fail: function(err) {
+			        // 转发失败
+			      }
+			    };
+			  },
 			drawCanvas(withBackground = false) {
 				console.log("Hello drawCanvas!");
 				this.$http.request({
@@ -75,8 +95,7 @@
 					ctx.fillRect(24 * scale, 55 * scale, 282 * scale, 39 * scale);
 					ctx.fillRect(24 * scale, 100 * scale, 282 * scale, 39 * scale);
 
-					// 绘制下面NO.线条元素
-					ctx.fillRect(192 * scale, 510 * scale, 145 * scale, 42 * scale);
+
 
 					// 绘制文字
 					const FontSize = 32 * scale; // 转换为 CSS 像素
@@ -90,40 +109,66 @@
 					ctx.setFillStyle('#ffffff');
 					ctx.fillText('# Class of 2024', (24 + 8) * scale, (100 + 30) * scale);
 
+					// 根据计数位数动态设置x坐标
+					let xPosition = 200 * scale;
+					let WPosition = 192 * scale;
+					let WPosition2 = 145 * scale;
+					
+					if (this.count >= 10000) {
+					  xPosition = 180 * scale; // 计数在10000以上
+					  WPosition = 172 * scale;
+					  WPosition2 = 125 * scale;
+					} else if (this.count < 1000) {
+					  xPosition = 220 * scale; // 计数在1000以下
+					  WPosition = 215 * scale;
+					  WPosition2 = 165 * scale;
+					  
+					}
+					// 绘制下面NO.线条元素
+					ctx.setFillStyle('#10263b');
+					ctx.fillRect(WPosition, 515 * scale, WPosition2, 42 * scale);
+					// ctx.fillRect(192 * scale, 515 * scale, 145 * scale, 42 * scale);
+					
 					ctx.setFontSize(32 * scale);
 					ctx.setFillStyle('#ffffff');
-					ctx.fillText(`No. ${this.count}`, 200 * scale, 544 * scale);
-					console.log(this.count);
-					ctx.setFontSize(20 * scale);
-					ctx.font = '20px Circular Pro'; // black，32px大小，Circular Pro字体
-					ctx.setFillStyle('#10263B');
-					ctx.fillText('Congrats', 260 * scale, 577 * scale);
+					ctx.fillText(`No. ${this.count}`, xPosition, 549 * scale);
 
-					ctx.setFontSize(20 * scale);
-					ctx.font = '20px Circular Pro'; // black，32px大小，Circular Pro字体
+					
+					ctx.setFontSize(24 * scale);
+					ctx.font = '24px Circular Pro'; // black，32px大小，Circular Pro字体
 					ctx.setFillStyle('#10263B');
-					ctx.fillText('from UNNC', 240 * scale, 600 * scale);
+					ctx.fillText('Congrats from UNNC', 120 * scale, 585 * scale);
+					// ctx.fillText('Congrats from UNNC', 260 * scale, 577 * scale);
+					
+
+					// ctx.setFontSize(20 * scale);
+					// ctx.font = '20px Circular Pro'; // black，32px大小，Circular Pro字体
+					// ctx.setFillStyle('#10263B');
+					// ctx.fillText('from UNNC', 240 * scale, 600 * scale);
 
 					ctx.setFontSize(15 * scale);
 					ctx.font = '12px PingFang SC'; // black，32px大小，Circular Po字体
 					ctx.setFillStyle('#10263b');
-					ctx.fillText('Scan to generate', 89 * scale, 561 * scale); 
-					ctx.fillText('your', 89 * scale, 571 * scale);
-					ctx.fillText('graduation', 89 * scale, 581 * scale);
-					ctx.fillText('photos!', 89 * scale, 591 * scale);
+					ctx.fillText('Scan to', 91 * scale, 526 * scale); 
+					ctx.fillText('generate your', 91 * scale, 536 * scale);
+					ctx.fillText('graduation', 91 * scale, 546 * scale);
+					ctx.fillText('photos!', 91 * scale, 556 * scale);
 					
 					// 设置填充颜色为灰色，例如 '#cccccc'
-					ctx.setFillStyle('#000000');
-					// 绘制圆形路径
-					ctx.beginPath();
-					ctx.arc(52, 590, 30, 0, Math.PI * 2, true);			
-					// 填充路径
-					ctx.fill();
+					// ctx.setFillStyle('#000000');
+					// // 绘制圆形路径
+					// ctx.beginPath();
+					// ctx.arc(52, 590, 30, 0, Math.PI * 2, true);			
+					// // 填充路径
+					// ctx.fill();
+					const QRcodeUrl = '/static/QRcode.png';
+					ctx.drawImage(QRcodeUrl, 28 * scale, 510 * scale, 55 * scale, 55 * scale);
+					
 
 					// 绘制图片
 					// const imgUrl = '/static/index/frame1.png';
 					console.log(this.type);
-					const imgUrl = this.avatarPath
+					const imgUrl = this.avatarPath;
 					if (this.type == "endlong") {
 						ctx.drawImage(imgUrl, 52 * scale, 159 * scale, 240 * scale, 321 * scale);
 					} else {
