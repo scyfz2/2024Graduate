@@ -101,10 +101,10 @@ var components
 try {
   components = {
     liuPictureComposition: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition */ "uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition").then(__webpack_require__.bind(null, /*! @/uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition.vue */ 92))
+      return __webpack_require__.e(/*! import() | uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition */ "uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition").then(__webpack_require__.bind(null, /*! @/uni_modules/liu-picture-composition/components/liu-picture-composition/liu-picture-composition.vue */ 84))
     },
     kspCropper: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper */ "uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper").then(__webpack_require__.bind(null, /*! @/uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper.vue */ 99))
+      return __webpack_require__.e(/*! import() | uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper */ "uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper").then(__webpack_require__.bind(null, /*! @/uni_modules/ksp-cropper/components/ksp-cropper/ksp-cropper.vue */ 91))
     },
   }
 } catch (e) {
@@ -191,6 +191,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 32));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 35));
+//
+//
 //
 //
 //

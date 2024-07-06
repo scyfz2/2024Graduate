@@ -135,14 +135,16 @@
 					<view class="green_spot" style="background-color: #F98109;"></view>
 					<text class="font_step">Step 3 / Add Sticker</text>
 				</view>
-				<scroll-view class="scroll" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
+				
+				<scroll-view class="scroll_sticker" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
 					<view class="group">
 						<view :class="getMaskOptKey.indexOf(index) > -1 ? 'selectedClass' : 'selectedClassDefault'"
 							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgsList2" :key="index">
-							<image class="frame_2" mode="widthFix" :src="item" />
+							<image class="sticker_2" mode="heightFix" :src="item" />
 						</view>
 					</view>
 				</scroll-view>
+				
 				<view class="flex-row group_6 mt-27">
 					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack1">
 						<text class="button_font">Back</text>
@@ -1055,11 +1057,11 @@
 		}
 
 		.selectedClass {
-			border: 1px solid #ffffff;
+			border: 2px solid #37B4B0;
 		}
 
 		.selectedClassDefault {
-			// border: 3px solid #fff;
+		  border: 2px solid rgba(255, 255, 255, 0); /* 完全透明的白色边框 */
 		}
 
 		.group2 {
@@ -1069,7 +1071,7 @@
 			.stickers {
 				width: 170rpx;
 				height: 86rpx;
-				background: #E3E3E3;
+				// background: #E3E3E3;
 				display: inline-block;
 				margin-right: 10rpx;
 			}
@@ -1487,5 +1489,61 @@
 		height: 182rpx;
 		width: 679rpx;
 		margin-right: 24px;
+	}
+	
+	.scroll_sticker {
+		width: 90vw;
+		margin-top: 20rpx;
+		margin-bottom: 50rpx;
+		box-sizing: border-box;
+		white-space: nowrap;
+	
+		.item {
+			// min-width: 162rpx;
+			height: 160rpx;
+			// background: #ff0000;
+			display: inline-block;
+			margin: 10rpx;
+			flex: 0 0 auto;
+			
+			position: relative; /* 添加相对定位 */
+			overflow: hidden; /* 确保边框不超出元素边界 */
+
+			.image {
+				height: 100%;
+			}
+		}
+	
+		.group {
+			display: flex;
+			flex-wrap: nowrap;
+	
+			height: 170rpx;
+		}
+	
+		.selectedClass {
+			border: 2px solid #37B4B0;
+		}
+	
+		.selectedClassDefault {
+		  border: 2px solid rgba(255, 255, 255, 0); /* 完全透明的白色边框 */
+		}
+	
+		
+		.group2 {
+			white-space: nowrap;
+			height: 86rpx;
+	
+			.stickers {
+				width: 170rpx;
+				height: 86rpx;
+				// background: #E3E3E3;
+				display: inline-block;
+				margin-right: 10rpx;
+			}
+		}
+	}
+	.sticker_2 {
+		height: 154rpx;
 	}
 </style>

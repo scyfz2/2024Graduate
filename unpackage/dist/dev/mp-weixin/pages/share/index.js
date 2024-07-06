@@ -243,8 +243,8 @@ var _default = {
           countValue = parseInt(_this2.count, 10); // 将字符串转换为整数
         }
 
-        countValue = 11;
-        if (countValue >= 10000) {
+        // countValue = 11;
+        if (countValue > 9999) {
           xPosition = 190 * scale; // 计数在10000以上
           WPosition = 185 * scale;
           WPosition2 = 155 * scale;
@@ -272,9 +272,8 @@ var _default = {
 
         ctx.setFontSize(32 * scale);
         ctx.setFillStyle('#ffffff');
-        ctx.fillText("No. 11", xPosition, 549 * scale);
-        // ctx.fillText(`No. ${this.count}`, xPosition, 549 * scale);
-
+        // ctx.fillText(`No. 11`, xPosition, 549 * scale);
+        ctx.fillText("No. ".concat(_this2.count), xPosition, 549 * scale);
         ctx.setFontSize(24 * scale);
         ctx.font = '24px Circular Pro'; // black，32px大小，Circular Pro字体
         ctx.setFillStyle('#10263B');

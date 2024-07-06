@@ -147,7 +147,11 @@ page.data-v-57280228 {
   height: 170rpx;
 }
 .scroll .selectedClass.data-v-57280228 {
-  border: 1px solid #ffffff;
+  border: 2px solid #37B4B0;
+}
+.scroll .selectedClassDefault.data-v-57280228 {
+  border: 2px solid rgba(255, 255, 255, 0);
+  /* 完全透明的白色边框 */
 }
 .scroll .group2.data-v-57280228 {
   white-space: nowrap;
@@ -156,7 +160,6 @@ page.data-v-57280228 {
 .scroll .group2 .stickers.data-v-57280228 {
   width: 170rpx;
   height: 86rpx;
-  background: #E3E3E3;
   display: inline-block;
   margin-right: 10rpx;
 }
@@ -479,5 +482,50 @@ page.data-v-57280228 {
   height: 182rpx;
   width: 679rpx;
   margin-right: 24px;
+}
+.scroll_sticker.data-v-57280228 {
+  width: 90vw;
+  margin-top: 20rpx;
+  margin-bottom: 50rpx;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.scroll_sticker .item.data-v-57280228 {
+  height: 160rpx;
+  display: inline-block;
+  margin: 10rpx;
+  flex: 0 0 auto;
+  position: relative;
+  /* 添加相对定位 */
+  overflow: hidden;
+  /* 确保边框不超出元素边界 */
+}
+.scroll_sticker .item .image.data-v-57280228 {
+  height: 100%;
+}
+.scroll_sticker .group.data-v-57280228 {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 170rpx;
+}
+.scroll_sticker .selectedClass.data-v-57280228 {
+  border: 2px solid #37B4B0;
+}
+.scroll_sticker .selectedClassDefault.data-v-57280228 {
+  border: 2px solid rgba(255, 255, 255, 0);
+  /* 完全透明的白色边框 */
+}
+.scroll_sticker .group2.data-v-57280228 {
+  white-space: nowrap;
+  height: 86rpx;
+}
+.scroll_sticker .group2 .stickers.data-v-57280228 {
+  width: 170rpx;
+  height: 86rpx;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.sticker_2.data-v-57280228 {
+  height: 154rpx;
 }
 
