@@ -421,15 +421,11 @@ var _default = {
       typeList: [],
       imgList: [],
       imgSelectIndex: null,
-      imgList0: [
-      // "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none.png",
-      "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2080.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2085.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2086.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2089.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2090.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2091.png"],
+      imgList0: ["https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none4.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2080.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2085.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2086.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2089.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2090.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2091.png"],
       imgsList0: [
       // "/static/image/frame/Group1.png",
       "/static/image/frame/Group2.png", "/static/image/frame/Group3.png", "/static/image/frame/Group4.png", "/static/image/frame/Group5.png", "/static/image/frame/Group6.png", "/static/image/frame/Group7.png"],
-      imgList1: [
-      // "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none2.png",
-      "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2081.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2082.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2083.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2084.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2087.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2088.png"],
+      imgList1: ["https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none3.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2081.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2082.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2083.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2084.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2087.png", "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2088.png"],
       imgsList1: [
       // "/static/image/frame/Group8.png",
       "/static/image/frame/Group9.png", "/static/image/frame/Group10.png", "/static/image/frame/Group11.png", "/static/image/frame/Group12.png", "/static/image/frame/Group13.png", "/static/image/frame/Group14.png"],

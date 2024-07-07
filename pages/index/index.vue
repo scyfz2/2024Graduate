@@ -235,7 +235,7 @@
 				imgList: [],
 				imgSelectIndex: null,
 				imgList0: [
-					// "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none4.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2080.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2085.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2086.png",
@@ -253,7 +253,7 @@
 					"/static/image/frame/Group7.png",
 				],
 				imgList1: [
-					// "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none2.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none3.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2081.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2082.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2083.png",
