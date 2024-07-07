@@ -43,14 +43,13 @@
 					:style="{ width: item.width+'px',height: item.height+'px',
 				top: item.centerY - item.height/2+'px', left: item.centerX - item.width/2+'px', transform: 'rotate(' +item.rotate+ 'deg)' + 'scale(' +item.scale+')' + 'rotateY('+ item.rotateY +'deg)'}">
 					<view class="m-mask-view">
-						<image :src="item.url" mode="" :id="`mask_${item.key}`" :data-key="`mask_${item.key}`"
-							:data-index="index">
+						<image :src="item.url" mode="" :id="`mask_${item.key}`" :data-key="`mask_${item.key}`" :data-index="index">
 						</image>
 						<text @touchstart.stop="closeGuashi(index)" class="cuIcon-close handle circle"
 							:class="{hideHandle: !item.edit}" id="handle" :data-key="`mask_${item.key}`"
 							:style="{top: 0  + 'px', left:'0px'}"></text>
-						<text class="cuIcon-full handle circle" :class="{hideHandle: !item.edit}"
-							:data-key="`mask_${item.key}`" id="handle" :style="{top:0+ 'px', right:'0px'}"></text>
+						<text class="cuIcon-full handle circle" :class="{hideHandle: !item.edit}" :data-key="`mask_${item.key}`"
+							id="handle" :style="{top:0+ 'px', right:'0px'}"></text>
 					</view>
 				</view>
 
@@ -69,8 +68,8 @@
 		</view>
 
 		<liu-picture-composition ref="picRef" :bgUrl="bgUrl" :photoUrl="photoUrl" :guashiUrl="gsUrl" :width="imgWidth"
-			:height="imgHeight" :dWidth="imgWidth" :dHeight="imgHeight" :radioFun="getRatioFun" :maskList="maskOptList"
-			:x="0" :y="0" :dx="0" :dy="0" :rotate="rotate" :scale="scale" @change="change"></liu-picture-composition>
+			:height="imgHeight" :dWidth="imgWidth" :dHeight="imgHeight" :radioFun="getRatioFun" :maskList="maskOptList" :x="0"
+			:y="0" :dx="0" :dy="0" :rotate="rotate" :scale="scale" @change="change"></liu-picture-composition>
 
 		<view class="choose">
 			<view class="flex-col section" v-if="step == 0">
@@ -81,17 +80,17 @@
 				<scroll-view class="scroll" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
 					<view class="group">
 
-						<view :class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg(item,index,'endlong')" class="item" v-for="(item,index) in imgList0"
-							:key="index">
-							<image class="frame_1" mode="widthFix" :src="item" />
+						<view @click="selectImg(item,index,'endlong')" class="item frame_1"
+							:class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
+							v-for="(item,index) in imgsList0" :key="index">
+							<image style="width: 100%; height: 100%" :src="item" />
 						</view>
 
 
-						<view :class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg(item,index, 'across')" class="item" v-for="(item,index) in imgList1"
-							:key="index">
-							<image class="frame_2" mode="widthFix" :src="item" />
+						<view @click="selectImg(item,index, 'across')" class="item frame_2"
+							:class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
+							v-for="(item,index) in imgsList1" :key="index">
+							<image mode="aspectFil" style="width: 100%; height: 100%;object-fit: cover;" :src="item" />
 						</view>
 
 					</view>
@@ -102,7 +101,7 @@
 						:class="nextState ? 'text-wrapper_4_bg2' : 'text-wrapper_4_bg1'" @click="nextStep1()">
 						<text class="button_font" style="color: white;">Next</text>
 					</view>
-					
+
 				</view>
 			</view>
 			<view class="flex-col section" v-if="step === 1">
@@ -111,18 +110,20 @@
 					<text class="font_step">Step 2 / Choose Pic</text>
 				</view>
 				<view>
-					<image class = "image_choose_pic items-center" src="https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/select-pic_button.png"  alt="Choose Pic" @click="onChooseAvatar" />
+					<image class="image_choose_pic items-center"
+						src="https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/select-pic_button.png" alt="Choose Pic"
+						@click="onChooseAvatar" />
 				</view>
-				
+
 				<view class="flex-row group_6 mt-27">
 					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack">
 						<text class="button_font">Back</text>
 					</view>
-					
-<!-- 					<view class="flex-col items-center button text-wrapper_3" @click="onChooseAvatar">
+
+					<!-- 					<view class="flex-col items-center button text-wrapper_3" @click="onChooseAvatar">
 						<text class="button_font">Choose a Pic</text>
 					</view> -->
-					
+
 					<view class="ml-16 flex-col items-center button text-wrapper_4"
 						:class="nextState ? 'text-wrapper_4_bg1' : 'text-wrapper_4_bg2'" @click="nextStep2()">
 						<text class="button_font" style="color: white;">Next</text>
@@ -135,23 +136,22 @@
 					<view class="green_spot" style="background-color: #F98109;"></view>
 					<text class="font_step">Step 3 / Add Sticker</text>
 				</view>
-				
+
 				<scroll-view class="scroll_sticker" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
 					<view class="group">
 						<view :class="getMaskOptKey.indexOf(index) > -1 ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgsList2" :key="index">
+							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgList2" :key="index">
 							<image class="sticker_2" mode="heightFix" :src="item" />
 						</view>
 					</view>
 				</scroll-view>
-				
+
 				<view class="flex-row group_6 mt-27">
 					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack1">
 						<text class="button_font">Back</text>
 					</view>
 					<view class="ml-16 flex-col items-center button text-wrapper_5"
-						:class="maskOptList.length > 0 ? 'text-wrapper_5_bg1' : 'text-wrapper_5_bg2'"
-						@click="compositionUrl()">
+						:class="maskOptList.length > 0 ? 'text-wrapper_5_bg1' : 'text-wrapper_5_bg2'" @click="compositionUrl()">
 						<text class="button_font" style="color: white;">Generate</text>
 					</view>
 				</view>
@@ -236,16 +236,16 @@
 				imgList: [],
 				imgSelectIndex: null,
 				imgList0: [
-					// "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2080.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2085.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none4.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/long2.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/long1.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2086.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2089.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2090.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2091.png",
 				],
 				imgsList0: [
-					// "/static/image/frame/Group1.png",
+					"/static/image/frame/Group1.png",
 					"/static/image/frame/Group2.png",
 					"/static/image/frame/Group3.png",
 					"/static/image/frame/Group4.png",
@@ -254,7 +254,7 @@
 					"/static/image/frame/Group7.png",
 				],
 				imgList1: [
-					// "https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none2.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/none3.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2081.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2082.png",
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2083.png",
@@ -263,7 +263,7 @@
 					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group%2088.png",
 				],
 				imgsList1: [
-					// "/static/image/frame/Group8.png",
+					"/static/image/frame/Group8.png",
 					"/static/image/frame/Group9.png",
 					"/static/image/frame/Group10.png",
 					"/static/image/frame/Group11.png",
@@ -471,7 +471,7 @@
 				let self = this;
 				var url = null
 				console.log(type);
-				if(type == "endlong") {
+				if (type == "endlong") {
 					url = self.imgList0[index];
 				} else {
 					url = self.imgList1[index];
@@ -937,7 +937,7 @@
 		width: 100vw;
 		padding: 54.47rpx 34.35rpx 75rpx 52.52rpx;
 		/* 将底部填充设置为 0 */
-		background-color: #10263b;
+		background-color: #152639;
 		// height: 100%;
 		/* 确保容器高度占据父元素的整个高度 */
 		box-sizing: border-box;
@@ -986,8 +986,8 @@
 			margin-left: 30rpx;
 		}
 	}
-	
-		
+
+
 	.biaoti2 {
 		margin-bottom: 262rpx;
 	}
@@ -1014,11 +1014,9 @@
 	}
 
 	.frame_2 {
-		top: 24rpx;
-		width: 60%;
-		// width: 170rpx;
-		// height: 128rpx;
-		object-fit: contain;
+		width: 170rpx;
+		height: 168rpx;
+		margin-top: 4rpx;
 	}
 
 	.scroll {
@@ -1029,11 +1027,11 @@
 		white-space: nowrap;
 
 		.item {
-			width: 170rpx;
-			height: 170rpx;
-			background: #E3E3E3;
+			// background: #E3E3E3;
+
+			background: rgba(0, 0, 0, 0);
 			display: inline-block;
-			margin: 10rpx;
+			margin: 0 10rpx;
 			flex: 0 0 auto;
 
 			// display: flex;
@@ -1042,11 +1040,11 @@
 			// background-color: #f0f0f0;
 			// overflow: hidden;
 			// position: relative;
-			.image {
-				width: 80%;
-				height: 80%;
-				object-fit: contain;
-			}
+			// .image {
+			// 	width: 80%;
+			// 	height: 80%;
+			// 	object-fit: contain;
+			// }
 		}
 
 		.group {
@@ -1061,7 +1059,8 @@
 		}
 
 		.selectedClassDefault {
-		  border: 2px solid rgba(255, 255, 255, 0); /* 完全透明的白色边框 */
+			border: 2px solid rgba(255, 255, 255, 0);
+			/* 完全透明的白色边框 */
 		}
 
 		.group2 {
@@ -1481,23 +1480,25 @@
 	.selClass {
 		border: 1rpx solid #ff4c4c;
 	}
+
 	.button_0 {
 		width: 600rpx;
 	}
+
 	.image_choose_pic {
 		justify-content: center;
 		height: 182rpx;
 		width: 679rpx;
 		margin-right: 24px;
 	}
-	
+
 	.scroll_sticker {
 		width: 90vw;
 		margin-top: 20rpx;
 		margin-bottom: 50rpx;
 		box-sizing: border-box;
 		white-space: nowrap;
-	
+
 		.item {
 			// min-width: 162rpx;
 			height: 160rpx;
@@ -1505,35 +1506,38 @@
 			display: inline-block;
 			margin: 10rpx;
 			flex: 0 0 auto;
-			
-			position: relative; /* 添加相对定位 */
-			overflow: hidden; /* 确保边框不超出元素边界 */
+
+			position: relative;
+			/* 添加相对定位 */
+			overflow: hidden;
+			/* 确保边框不超出元素边界 */
 
 			.image {
 				height: 100%;
 			}
 		}
-	
+
 		.group {
 			display: flex;
 			flex-wrap: nowrap;
-	
+
 			height: 170rpx;
 		}
-	
+
 		.selectedClass {
 			border: 2px solid #37B4B0;
 		}
-	
+
 		.selectedClassDefault {
-		  border: 2px solid rgba(255, 255, 255, 0); /* 完全透明的白色边框 */
+			border: 2px solid rgba(255, 255, 255, 0);
+			/* 完全透明的白色边框 */
 		}
-	
-		
+
+
 		.group2 {
 			white-space: nowrap;
 			height: 86rpx;
-	
+
 			.stickers {
 				width: 170rpx;
 				height: 86rpx;
@@ -1543,6 +1547,7 @@
 			}
 		}
 	}
+
 	.sticker_2 {
 		height: 154rpx;
 	}
