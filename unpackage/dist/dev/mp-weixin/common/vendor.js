@@ -9486,6 +9486,7 @@ internalMixin(Vue);
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 27 */,
 /* 28 */,
 /* 29 */,
@@ -9689,6 +9690,9 @@ module.exports = API;
 
 /***/ }),
 /* 31 */
+=======
+/* 27 */
+>>>>>>> origin/master
 /*!************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js ***!
   \************************************************************************************/
@@ -9703,20 +9707,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 32));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 34));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 30));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 35));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 36));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 37));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 38));
-var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 39));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 32));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 33));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 34));
+var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 35));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 41));
+var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 37));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e34) { throw _e34; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e35) { didErr = true; err = _e35; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
@@ -10164,12 +10168,25 @@ var S = "development" === "development",
   k = "true" === undefined || !0 === undefined,
   A = I([]),
   P = "h5" === b ? "web" : "app-plus" === b ? "app" : b,
-  T = I(undefined),
-  C = I([]) || [],
+  T = I({
+    "address": [
+        "127.0.0.1",
+        "172.20.10.13"
+    ],
+    "debugPort": 9000,
+    "initialLaunchType": "local",
+    "servePort": 7000,
+    "skipFiles": [
+        "<node_internals>/**",
+        "E:/HBuilderX/plugins/unicloud/**/*.js"
+    ]
+}
+),
+  C = I([{"provider":"aliyun","spaceName":"head-decoration","spaceId":"mp-8a64465d-cecf-48a5-b167-d916c69acd8f","clientSecret":"Hb6ejrCdRQ8eGPdFB78tpQ==","endpoint":"https://api.next.bspapp.com"}]) || [],
   x = true;
 var O = "";
 try {
-  O = (__webpack_require__(/*! uni-stat-config */ 42).default || __webpack_require__(/*! uni-stat-config */ 42)).appid;
+  O = (__webpack_require__(/*! uni-stat-config */ 38).default || __webpack_require__(/*! uni-stat-config */ 38)).appid;
 } catch (e) {}
 var E = {};
 function L(e) {
@@ -17489,7 +17506,7 @@ exports.default = $s;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-/* 32 */
+/* 28 */
 /*!************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
   \************************************************************************************************/
@@ -17498,11 +17515,11 @@ exports.default = $s;
 
 // TODO(Babel 8): Remove this file.
 
-var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 33)();
+var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 29)();
 module.exports = runtime;
 
 /***/ }),
-/* 33 */
+/* 29 */
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
   \*******************************************************************/
@@ -17823,7 +17840,7 @@ function _regeneratorRuntime() {
 module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 34 */
+/* 30 */
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
   \**********************************************************************/
@@ -17839,7 +17856,7 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 35 */
+/* 31 */
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
   \*****************************************************************/
@@ -17879,7 +17896,7 @@ function _asyncToGenerator(fn) {
 module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 36 */
+/* 32 */
 /*!*********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
   \*********************************************************/
@@ -17906,7 +17923,7 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 37 */
+/* 33 */
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
   \**************************************************************************/
@@ -17914,7 +17931,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 /***/ (function(module, exports, __webpack_require__) {
 
 var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 34);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 30);
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
@@ -17926,7 +17943,7 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 38 */
+/* 34 */
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
   \***************************************************************/
@@ -17942,16 +17959,16 @@ function _getPrototypeOf(o) {
 module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 39 */
+/* 35 */
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js ***!
   \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 38);
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 34);
 var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 40);
+var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 36);
 var construct = __webpack_require__(/*! ./construct.js */ 15);
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? new Map() : undefined;
@@ -17982,7 +17999,7 @@ function _wrapNativeSuper(Class) {
 module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 40 */
+/* 36 */
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/isNativeFunction.js ***!
   \*****************************************************************/
@@ -17995,10 +18012,17 @@ function _isNativeFunction(fn) {
 module.exports = _isNativeFunction, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
+<<<<<<< HEAD
 /* 41 */
 /*!*****************************************************************************************!*\
   !*** /Users/conner-ck/WORK/2024-graduation-new/pages.json?{"type":"origin-pages-json"} ***!
   \*****************************************************************************************/
+=======
+/* 37 */
+/*!****************************************************************************************!*\
+  !*** G:/HBuilderProjects/0705/2024-graduation/pages.json?{"type":"origin-pages-json"} ***!
+  \****************************************************************************************/
+>>>>>>> origin/master
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18045,10 +18069,17 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
+<<<<<<< HEAD
 /* 42 */
 /*!****************************************************************************!*\
   !*** /Users/conner-ck/WORK/2024-graduation-new/pages.json?{"type":"stat"} ***!
   \****************************************************************************/
+=======
+/* 38 */
+/*!***************************************************************************!*\
+  !*** G:/HBuilderProjects/0705/2024-graduation/pages.json?{"type":"stat"} ***!
+  \***************************************************************************/
+>>>>>>> origin/master
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18063,6 +18094,208 @@ var _default = {
   "appid": "__UNI__91EB0F2"
 };
 exports.default = _default;
+
+/***/ }),
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */
+/*!***********************************************************!*\
+  !*** G:/HBuilderProjects/0705/2024-graduation/api/api.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uniCloud) {var API = {};
+var getCategory = function getCategory() {
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'getCategory',
+      data: {},
+      success: function success(res) {
+        console.log(res);
+        resolve(res.result);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+var getList = function getList(index, cat_id) {
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'get',
+      data: {
+        dbName: 'emjio-list',
+        //要查询的表名
+        filter: {
+          'category': cat_id
+        },
+        //筛选条件，格式{sex:'女'}
+        pageIndex: index,
+        //第几页
+        pageSize: 10 //每页的记录条数
+      },
+      success: function success(res) {
+        resolve(res.result.data);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+var reommendIconList = function reommendIconList(index, searchVal) {
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'reommendIconList',
+      data: {
+        dbName: 'emjio-list',
+        //要查询的表名
+        searchVal: searchVal,
+        //筛选条件，格式{sex:'女'}
+        pageIndex: index,
+        //第几页
+        pageSize: 10 //每页的记录条数
+      },
+      success: function success(res) {
+        resolve(res.result.data);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+var searchIcon = function searchIcon(index, searchVal) {
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'searchIcon',
+      data: {
+        dbName: 'emjio-list',
+        //要查询的表名
+        searchVal: searchVal,
+        //筛选条件，格式{sex:'女'}
+        pageIndex: index,
+        //第几页
+        pageSize: 10 //每页的记录条数
+      },
+      success: function success(res) {
+        resolve(res.result.data);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+var getAllKeys = function getAllKeys() {
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'getAllKeys',
+      success: function success(res) {
+        resolve(res);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+var search = function search(pageIndex, pageSize, keyword, key, dbName) {
+  var filter = {};
+  if (keyword == undefined) {
+    keyword = '';
+  }
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'hahaSearch',
+      data: {
+        dbName: dbName,
+        key: key,
+        keyword: keyword,
+        pageIndex: pageIndex,
+        pageSize: pageSize
+      },
+      success: function success(res) {
+        console.log(res);
+        resolve(res.result.data);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+var getCustomAvatarCategory = function getCustomAvatarCategory() {
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'getCustomAvatarCategory',
+      data: {
+        dbName: 'custom-avatar-classify'
+      },
+      success: function success(res) {
+        resolve(res.result);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+var getCustomAvatarList = function getCustomAvatarList(category_id) {
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'getCustomAvatarList',
+      data: {
+        category_id: category_id
+      },
+      success: function success(res) {
+        resolve(res.result);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+var getAppConfig = function getAppConfig(appid) {
+  return new Promise(function (resolve, reject) {
+    uniCloud.callFunction({
+      name: 'getAppConfig',
+      data: {
+        appid: appid
+      },
+      success: function success(res) {
+        resolve(res.result);
+      },
+      fail: function fail(err) {
+        reject(err);
+      },
+      complete: function complete() {}
+    });
+  });
+};
+API.getCustomAvatarCategory = getCustomAvatarCategory;
+API.getCustomAvatarList = getCustomAvatarList;
+API.getList = getList;
+API.getCategory = getCategory;
+API.reommendIconList = reommendIconList;
+API.searchIcon = searchIcon;
+API.getAllKeys = getAllKeys;
+API.search = search;
+API.getAppConfig = getAppConfig;
+module.exports = API;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"]))
 
 /***/ }),
 /* 43 */,
