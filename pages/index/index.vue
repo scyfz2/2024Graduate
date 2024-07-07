@@ -195,7 +195,6 @@
 				imgurl: "",
 				imgurl1: "",
 				showBorder: false,
-				showBorder1: false,
 
 
 				maskSize: 0,
@@ -273,35 +272,55 @@
 				],
 				imgSelectIndex1: null,
 				imgList2: [
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s1.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s2.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s3.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s4.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s5.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s6.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s7.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s8.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s9.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s10.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s11.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s12.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s13.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s14.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s15.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s16.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s17.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s18.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s19.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s20.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s21.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s22.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s23.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s24.png",
-					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/s25.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group153.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group154.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group155.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group156.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group157.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group158.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group159.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group160.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group161.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group162.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group163.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group164.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group165.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group166.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group167.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group168.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group169.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group170.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group171.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group172.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group173.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group174.png",
+					"https://graduation-1313923643.cos.ap-nanjing.myqcloud.com/Group175.png",
 				],
 				imgsList2: [
-					"/static/image/pic/pic1.png",
-					"/static/image/pic/pic2.png",
+					"/static/image/pic/Group 125.png",
+					"/static/image/pic/Group 126.png",
+					"/static/image/pic/Group 127.png",
+					"/static/image/pic/Group 128.png",
+					"/static/image/pic/Group 129.png",
+					"/static/image/pic/Group 130.png",
+					"/static/image/pic/Group 131.png",
+					"/static/image/pic/Group 116.png",
+					"/static/image/pic/Group 117.png",
+					"/static/image/pic/Group 118.png",
+					"/static/image/pic/Group 119.png",
+					"/static/image/pic/Group 120.png",
+					"/static/image/pic/Group 121.png",
+					"/static/image/pic/Group 122.png",
+					"/static/image/pic/Group 123.png",
+					"/static/image/pic/Group 124.png",
+					"/static/image/pic/Group 114.png",
+					"/static/image/pic/Group 115.png",
+					"/static/image/pic/Group 113.png",
+					"/static/image/pic/Group 112.png",
+					"/static/image/pic/Group 111.png",
+					"/static/image/pic/Group 109.png",
+					"/static/image/pic/Group 106.png",
+					
 				],
 				maskOptList: [],
 			}
@@ -359,7 +378,18 @@
 		},
 		methods: {
 			getRatioFun(val, item) {
-				let ratio = _self.imgWidth / uni.upx2px(513)
+				
+				// 声明 maxX 变量
+				let maxX;
+				// 使用 this.type 来获取当前的 type 值
+				if (_self.type === 'endlong') {
+					maxX = uni.upx2px(513); // 条件为真时赋值
+				} else {
+					maxX = uni.upx2px(568); // 条件为假时赋值
+				}
+				// console.log("========type======", _self.type)
+				// console.log("========maxX======", maxX)
+				let ratio = _self.imgWidth / maxX;
 				return ratio * val
 			},
 			throttle(func, wait) {
@@ -457,6 +487,8 @@
 				this.imgSelectIndex1 = null
 			},
 			nextStepBack1() {
+				// 清空画板上所有的贴纸
+				this.maskOptList = [];
 				this.step = 1
 				this.showBorder = false
 				this.gsUrl = null
@@ -540,10 +572,18 @@
 					success(res) {
 						console.log('-----res--', res)
 						var maxWidth = 80;
+						// 声明 maxX 变量
+						let maxX;
+						// 使用 this.type 来获取当前的 type 值
+						if (this.type === 'endlong') {
+							maxX = uni.upx2px(513); // 条件为真时赋值
+						} else {
+							maxX = uni.upx2px(568); // 条件为假时赋值
+						}
 						self.maskOptList.forEach(v => v.edit = false)
 						self.maskOptList.push({
 							key: index,
-							centerX: uni.upx2px(513) / 2,
+							centerX: maxX / 2,
 							centerY: 100,
 							width: maxWidth,
 							height: maxWidth * res.height / res.width,
@@ -571,7 +611,6 @@
 			},
 			touchAvatarBg() {
 				this.showBorder = false;
-				this.showBorder1 = false
 			},
 			touchStart(e) {
 				console.log('e.target.id', e.target);
@@ -603,13 +642,24 @@
 					this.start_x = e.touches[0].clientX;
 					this.start_y = e.touches[0].clientY;
 				}
+
+			
 			},
 			touchMove(e) {
 				var current_x = e.touches[0].clientX;
 				var current_y = e.touches[0].clientY;
 				var moved_x = current_x - this.start_x;
 				var moved_y = current_y - this.start_y;
-				let maxX = uni.upx2px(513)
+				
+				  // 声明 maxX 变量
+				  let maxX;
+				  // 使用 this.type 来获取当前的 type 值
+				  if (this.type === 'endlong') {
+					maxX = uni.upx2px(513); // 条件为真时赋值
+				  } else {
+					maxX = uni.upx2px(568); // 条件为假时赋值
+				  }
+				
 				let maxY = maxX * this.imgHeight / this.imgWidth
 				if (this.touch_target.indexOf("mask") > -1) {
 					let item = this.maskOptList.find(item => item.edit)
@@ -671,6 +721,9 @@
 					let w = initialW + (lineB - lineA);
 					//由于是等比缩放，所以乘一个宽高比例。
 					let h = initialH + (lineB - lineA) * (initialH / initialW);
+					
+
+						
 					//定义最大宽高
 					item.width = w >= initialW * 2 ? initialW * 2 : w;
 					item.height = h >= initialH * 2 ? initialH * 2 : h;
