@@ -60,7 +60,7 @@
 		</view>
 		<view class="watermark">
 			<text class="watermark1">
-				{{step === 0 ? "Please choose a frame" : step === 1 ? "Click here to choose pic" : "Use two fingers to drag & zoom-in/out"}}
+				{{step === 0 ? "Please choose a frame" : step === 1 ? "Please choose a picture" : "Please add stickers"}}
 			</text>
 			<view class="watermark2">
 				Graduation
@@ -81,14 +81,14 @@
 					<view class="group">
 
 						<view @click="selectImg(item,index,'endlong')" class="item frame_1"
-							:class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
+							:class="imgSelectIndex == index && type == 'endlong' ? 'selectedClass' : 'selectedClassDefault'"
 							v-for="(item,index) in imgsList0" :key="index">
 							<image style="width: 100%; height: 100%" :src="item" />
 						</view>
 
 
 						<view @click="selectImg(item,index, 'across')" class="item frame_2"
-							:class="imgSelectIndex == index ? 'selectedClass' : 'selectedClassDefault'"
+							:class="imgSelectIndex == index && type != 'endlong' ? 'selectedClass' : 'selectedClassDefault'"
 							v-for="(item,index) in imgsList1" :key="index">
 							<image mode="aspectFil" style="width: 100%; height: 100%;object-fit: cover;" :src="item" />
 						</view>
@@ -97,8 +97,7 @@
 				</scroll-view>
 				<view class="flex-row group_6 mt-27">
 
-					<view class="ml-16 flex-col items-center button_0 text-wrapper_4"
-						:class="nextState ? 'text-wrapper_4_bg2' : 'text-wrapper_4_bg1'" @click="nextStep1()">
+					<view class="ml-16 flex-col items-center button_0 text-wrapper_4 text-wrapper_4_bg1" @click="nextStep1()">
 						<text class="button_font" style="color: white;">Next</text>
 					</view>
 
@@ -140,7 +139,7 @@
 				<scroll-view class="scroll_sticker" scrollWithAnimation scrollX :scrollLeft="scrollLeft">
 					<view class="group">
 						<view :class="getMaskOptKey.indexOf(index) > -1 ? 'selectedClass' : 'selectedClassDefault'"
-							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgList2" :key="index">
+							@click="selectImg1(item,index)" class="item" v-for="(item,index) in imgsList2" :key="index">
 							<image class="sticker_2" mode="heightFix" :src="item" />
 						</view>
 					</view>
@@ -150,8 +149,7 @@
 					<view class="flex-col items-center button text-wrapper_3" @click="nextStepBack1">
 						<text class="button_font">Back</text>
 					</view>
-					<view class="ml-16 flex-col items-center button text-wrapper_5"
-						:class="maskOptList.length > 0 ? 'text-wrapper_5_bg1' : 'text-wrapper_5_bg2'" @click="compositionUrl()">
+					<view class="ml-16 flex-col items-center button text-wrapper_5 text-wrapper_5_bg1" @click="compositionUrl()">
 						<text class="button_font" style="color: white;">Generate</text>
 					</view>
 				</view>
@@ -190,7 +188,7 @@
 				windowHeight: 0,
 				cansWidth: 0, // 宽度 px
 				cansHeight: 0, // 高度 px
-				avatarPath: "",
+				avatarPath: null,
 				currentMaskId: -1,
 				imgurl: "",
 				imgurl1: "",
@@ -320,7 +318,7 @@
 					"/static/image/pic/Group 111.png",
 					"/static/image/pic/Group 109.png",
 					"/static/image/pic/Group 106.png",
-					
+
 				],
 				maskOptList: [],
 			}
@@ -345,12 +343,10 @@
 			},
 			maskPic: function() {
 				var pic = this.imgurl;
-				console.log(pic)
 				return pic;
 			},
 			maskPic1: function() {
 				var pic = this.imgurl1;
-				console.log(pic)
 				return pic;
 			},
 			nextState() {
@@ -361,11 +357,19 @@
 				return state
 			}
 		},
+		watch: {
+			avatarPath(newVal, old) {
+				console.log(newVal, old, "////");
+			}
+		},
+		created() {
+			// 将节流处理后的函数保存为实例属性，避免每次调用都创建新的节流函数
+			this.throttledSelectImg1Event = this.throttle(this.selectImg1Event, 800);
+		},
 		onLoad(option) {
 			_self = this
 			this.initial = {}
 			this.windowHeight = getApp().globalData.windowHeight;
-			console.log("=======", this.maskSizeHeight)
 			this.img_h = this.windowHeight - 237 - 30
 
 			var maxWidth = getApp().globalData.windowWidth - 30;
@@ -374,11 +378,20 @@
 			this.maskSizeWidth = maxWidth
 
 			this.imgSelectIndex = null
-			// this.selectImg(this.imgList1[this.imgSelectIndex], this.imgSelectIndex)
+			this.selectImg(this.imgsList0[0], 0, "endlong")
 		},
 		methods: {
+			debounce(func, wait) {
+				let timeout;
+				return function(...args) {
+					clearTimeout(timeout);
+					timeout = setTimeout(() => {
+						func.apply(this, args);
+					}, wait);
+				};
+			},
 			getRatioFun(val, item) {
-				
+
 				// 声明 maxX 变量
 				let maxX;
 				// 使用 this.type 来获取当前的 type 值
@@ -387,8 +400,6 @@
 				} else {
 					maxX = uni.upx2px(568); // 条件为假时赋值
 				}
-				// console.log("========type======", _self.type)
-				// console.log("========maxX======", maxX)
 				let ratio = _self.imgWidth / maxX;
 				return ratio * val
 			},
@@ -408,18 +419,17 @@
 				})
 			},
 			change(e) {
-				console.log("实际上1", e);
 				this.throttle(this.handleSkip(e), 500)
 			},
 			handleSkip(e) {
-				if (this.maskOptList.length < 1) {
-					uni.showToast({
-						title: 'choose a sticker',
-						duration: 2000,
-						icon: "none"
-					})
-					return
-				}
+				// if (this.maskOptList.length < 1) {
+				// 	uni.showToast({
+				// 		title: 'choose a sticker',
+				// 		duration: 2000,
+				// 		icon: "none"
+				// 	})
+				// 	return
+				// }
 				let _this = this;
 				const tempFilePath = e; // 替换为实际的临时文件路径
 				uni.navigateTo({
@@ -438,7 +448,7 @@
 					// 	resize: true
 					// },
 					success: (res) => {
-						console.log(res)
+
 						this.url = res.tempFilePaths[0];
 
 						// this.avatarPath = res.tempFilePaths[0];
@@ -458,23 +468,19 @@
 				// 			quality: 1, // 裁剪后的图片质量
 				// 			success: function(cropImageRes) {
 				// 				_this.url = cropImageRes.tempFilePath
-				// 				console.log('裁剪后的图片路径：' + cropImageRes.tempFilePath);
 				// 			},
 				// 			fail: function(err) {
-				// 				console.error('裁剪失败：' + err.errMsg);
 				// 			}
 				// 		});
 				// 	}
 				// });
 			},
 			onok(ev) {
-				console.log("事件触发");
 				this.url = "";
 
 				this.path = ev.path;
 				this.bgUrl = ev.path;
 				this.avatarPath = ev.path;
-				console.log("----ev.path-", ev.path)
 			},
 			oncancel() {
 				// url设置为空，隐藏控件
@@ -483,10 +489,12 @@
 			nextStepBack() {
 				this.step = 0
 				this.showBorder = false
-				this.gsUrl = null
-				this.imgSelectIndex1 = null
+				// this.gsUrl = null
+				// this.imgSelectIndex1 = null
 			},
 			nextStepBack1() {
+
+
 				// 清空画板上所有的贴纸
 				this.maskOptList = [];
 				this.step = 1
@@ -496,23 +504,20 @@
 			},
 			selectImg(item, index, type) {
 				this.type = type || 'endlong';
-				console.log(item, index)
-				// this.avatarPath = item
-				// this.changeMask()
 				this.imgSelectIndex = index
 				let self = this;
 				var url = null
-				console.log(type);
 				if (type == "endlong") {
 					url = self.imgList0[index];
 				} else {
 					url = self.imgList1[index];
 				}
-				console.log(url);
+				self.imgurl = null;
+				// this.avatarPath = item
+				// this.changeMask()
 				uni.getImageInfo({
 					src: url,
 					success(res) {
-						console.log('-----res--', res)
 						var maxWidth = getApp().globalData.windowWidth - 30;
 						self.maskCenterY = self.img_h / 2
 
@@ -532,9 +537,7 @@
 				uni.downloadFile({
 					url: url,
 					success: function(res) {
-						console.log('-------', res)
 						uni.hideLoading();
-						console.log(res.tempFilePath);
 						self.imgurl = res.tempFilePath
 						self.photoUrl = res.tempFilePath
 
@@ -557,63 +560,50 @@
 
 			},
 			selectImg1(item, index) {
-				console.log(item)
+				this.throttledSelectImg1Event(item, index);
+			},
+			selectImg1Event(item, index) {
 				let indx = this.maskOptList.findIndex(val => val.key === index)
-				if (indx > -1) {
-					this.maskOptList.splice(indx)
-					return false;
-				}
-				this.imgSelectIndex1 = index
-				let self = this;
-				var url = self.imgList2[index];
-
-				uni.getImageInfo({
-					src: url,
-					success(res) {
-						console.log('-----res--', res)
-						var maxWidth = 80;
-						// 声明 maxX 变量
-						let maxX;
-						// 使用 this.type 来获取当前的 type 值
-						if (this.type === 'endlong') {
-							maxX = uni.upx2px(513); // 条件为真时赋值
-						} else {
-							maxX = uni.upx2px(568); // 条件为假时赋值
+				if (indx === -1) {
+					this.imgSelectIndex1 = index
+					let self = this;
+					var url = self.imgList2[index];
+					uni.getImageInfo({
+						src: url,
+						success(res) {
+							var maxWidth = 80;
+							// 声明 maxX 变量
+							let maxX;
+							// 使用 this.type 来获取当前的 type 值
+							if (this.type === 'endlong') {
+								maxX = uni.upx2px(513); // 条件为真时赋值
+							} else {
+								maxX = uni.upx2px(568); // 条件为假时赋值
+							}
+							self.maskOptList.forEach(v => v.edit = false)
+							self.maskOptList.push({
+								key: index,
+								centerX: maxX / 2,
+								centerY: 100,
+								width: maxWidth,
+								height: maxWidth * res.height / res.width,
+								scale: 1,
+								rotate: 0,
+								rotateY: 0,
+								url: res.path,
+								edit: true
+							})
 						}
-						self.maskOptList.forEach(v => v.edit = false)
-						self.maskOptList.push({
-							key: index,
-							centerX: maxX / 2,
-							centerY: 100,
-							width: maxWidth,
-							height: maxWidth * res.height / res.width,
-							scale: 1,
-							rotate: 0,
-							rotateY: 0,
-							url: res.path,
-							edit: true
-						})
-					}
-				})
-				// uni.downloadFile({
-				// 	url: url,
-				// 	success: function(res) {
-				// 		console.log("+++++", res);
-				// 		// self.imgurl1 = res.tempFilePath
-				// 		self.gsUrl = res.tempFilePath
-				// 	},
-				// 	fail: function(e) {}
-				// })
+					})
+				}
 			},
 			closeGuashi(index) {
-				console.log(index);
 				this.maskOptList.splice(index, 1)
 			},
 			touchAvatarBg() {
 				this.showBorder = false;
 			},
 			touchStart(e) {
-				console.log('e.target.id', e.target);
 				this.maskOptList.forEach(v => {
 					if (`mask_${v.key}` == e.target.dataset.key) {
 						v.edit = true
@@ -643,23 +633,23 @@
 					this.start_y = e.touches[0].clientY;
 				}
 
-			
+
 			},
 			touchMove(e) {
 				var current_x = e.touches[0].clientX;
 				var current_y = e.touches[0].clientY;
 				var moved_x = current_x - this.start_x;
 				var moved_y = current_y - this.start_y;
-				
-				  // 声明 maxX 变量
-				  let maxX;
-				  // 使用 this.type 来获取当前的 type 值
-				  if (this.type === 'endlong') {
+
+				// 声明 maxX 变量
+				let maxX;
+				// 使用 this.type 来获取当前的 type 值
+				if (this.type === 'endlong') {
 					maxX = uni.upx2px(513); // 条件为真时赋值
-				  } else {
+				} else {
 					maxX = uni.upx2px(568); // 条件为假时赋值
-				  }
-				
+				}
+
 				let maxY = maxX * this.imgHeight / this.imgWidth
 				if (this.touch_target.indexOf("mask") > -1) {
 					let item = this.maskOptList.find(item => item.edit)
@@ -682,7 +672,6 @@
 
 					item.centerX = x
 					item.centerY = y
-					// console.log(item);
 
 					// this.maskCenterX = this.maskCenterX + moved_x;
 					// this.maskCenterY = this.maskCenterY + moved_y;
@@ -721,9 +710,9 @@
 					let w = initialW + (lineB - lineA);
 					//由于是等比缩放，所以乘一个宽高比例。
 					let h = initialH + (lineB - lineA) * (initialH / initialW);
-					
 
-						
+
+
 					//定义最大宽高
 					item.width = w >= initialW * 2 ? initialW * 2 : w;
 					item.height = h >= initialH * 2 ? initialH * 2 : h;
@@ -755,7 +744,6 @@
 
 			},
 			touchEnd(e) {
-				console.log(e);
 				this.mask_center_x = this.maskCenterX;
 				this.mask_center_y = this.maskCenterY;
 				this.cancel_center_x = this.cancelCenterX;
@@ -766,8 +754,6 @@
 				this.scaleCurrent = this.scale;
 				this.rotateCurrent = this.rotate;
 
-				console.log("----x", this.cancel_center_x)
-				console.log("----y", this.cancel_center_y)
 			},
 			getRotationAngle(centerX, centerY, x, y) {
 				// 计算点到中心点的角度
@@ -787,9 +773,7 @@
 				uni.downloadFile({
 					url: url,
 					success: function(res) {
-						console.log('-------', res)
 						uni.hideLoading();
-						console.log(res.tempFilePath);
 						self.imgurl = res.tempFilePath
 					},
 					fail: function(e) {}
@@ -916,9 +900,7 @@
 								// 	showCancel: false
 								// });
 								uni.vibrateShort({
-									success: function() {
-										console.log('vibrateShort');
-									}
+									success: function() {}
 								});
 							},
 							fail(res) {
@@ -928,11 +910,9 @@
 										success(res) {
 											if (res.confirm) {
 												uni.openSetting({
-													success(res) {
-														console.log("相册授权成功");
-													},
+													success(res) {},
 													fail(res) {
-														console.log(res)
+
 													}
 												})
 											}
@@ -1228,7 +1208,7 @@
 	}
 
 	.avatar-bg-border {
-		background-color: white;
+		background-color: #dddfe2;
 		// border: 6px solid white;
 		// border-radius: 10px;
 		// width: calc(100% - 30px);
@@ -1265,7 +1245,7 @@
 			// width: 100%;
 			// height: 60rpx;
 			padding: 20rpx 50rpx;
-			border-radius: 30rpx;
+			border-radius: 45rpx;
 			text-align: center;
 			background: #e5e5e5;
 			color: #9d9d9d;

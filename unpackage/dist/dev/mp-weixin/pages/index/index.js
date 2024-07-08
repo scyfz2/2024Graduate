@@ -130,7 +130,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   var l0 =
     _vm.step == 2
-      ? _vm.__map(_vm.imgList2, function (item, index) {
+      ? _vm.__map(_vm.imgsList2, function (item, index) {
           var $orig = _vm.__get_orig(item)
           var g0 = _vm.getMaskOptKey.indexOf(index)
           return {
@@ -139,13 +139,11 @@ var render = function () {
           }
         })
       : null
-  var g1 = _vm.step == 2 ? _vm.maskOptList.length : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
         l0: l0,
-        g1: g1,
       },
     }
   )
@@ -357,8 +355,6 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 //
 //
 //
-//
-//
 
 var list = {};
 var _self = null;
@@ -384,7 +380,7 @@ var _default = {
       // 宽度 px
       cansHeight: 0,
       // 高度 px
-      avatarPath: "",
+      avatarPath: null,
       currentMaskId: -1,
       imgurl: "",
       imgurl1: "",
@@ -452,12 +448,10 @@ var _default = {
     },
     maskPic: function maskPic() {
       var pic = this.imgurl;
-      console.log(pic);
       return pic;
     },
     maskPic1: function maskPic1() {
       var pic = this.imgurl1;
-      console.log(pic);
       return pic;
     },
     nextState: function nextState() {
@@ -468,21 +462,41 @@ var _default = {
       return state;
     }
   },
+  watch: {
+    avatarPath: function avatarPath(newVal, old) {
+      console.log(newVal, old, "////");
+    }
+  },
+  created: function created() {
+    // 将节流处理后的函数保存为实例属性，避免每次调用都创建新的节流函数
+    this.throttledSelectImg1Event = this.throttle(this.selectImg1Event, 800);
+  },
   onLoad: function onLoad(option) {
     _self = this;
     this.initial = {};
     this.windowHeight = getApp().globalData.windowHeight;
-    console.log("=======", this.maskSizeHeight);
     this.img_h = this.windowHeight - 237 - 30;
     var maxWidth = getApp().globalData.windowWidth - 30;
     // this.maskCenterY = this.img_h / 2
     this.maskSizeHeight = maxWidth * 653 / 489;
     this.maskSizeWidth = maxWidth;
     this.imgSelectIndex = null;
-    // this.selectImg(this.imgList1[this.imgSelectIndex], this.imgSelectIndex)
+    this.selectImg(this.imgsList0[0], 0, "endlong");
   },
-
   methods: {
+    debounce: function debounce(func, wait) {
+      var timeout;
+      return function () {
+        var _this2 = this;
+        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          func.apply(_this2, args);
+        }, wait);
+      };
+    },
     getRatioFun: function getRatioFun(val, item) {
       // 声明 maxX 变量
       var maxX;
@@ -492,8 +506,7 @@ var _default = {
       } else {
         maxX = uni.upx2px(568); // 条件为假时赋值
       }
-      // console.log("========type======", _self.type)
-      // console.log("========maxX======", maxX)
+
       var ratio = _self.imgWidth / maxX;
       return ratio * val;
     },
@@ -503,32 +516,31 @@ var _default = {
         var now = new Date().getTime();
         if (now - lastTime >= wait) {
           lastTime = now;
-          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
+          for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+            args[_key2] = arguments[_key2];
           }
           func.apply(this, args);
         }
       };
     },
     compositionUrl: function compositionUrl() {
-      var _this2 = this;
+      var _this3 = this;
       this.$nextTick(function (res) {
-        _this2.$refs.picRef.getNewUrl();
+        _this3.$refs.picRef.getNewUrl();
       });
     },
     change: function change(e) {
-      console.log("实际上1", e);
       this.throttle(this.handleSkip(e), 500);
     },
     handleSkip: function handleSkip(e) {
-      if (this.maskOptList.length < 1) {
-        uni.showToast({
-          title: 'choose a sticker',
-          duration: 2000,
-          icon: "none"
-        });
-        return;
-      }
+      // if (this.maskOptList.length < 1) {
+      // 	uni.showToast({
+      // 		title: 'choose a sticker',
+      // 		duration: 2000,
+      // 		icon: "none"
+      // 	})
+      // 	return
+      // }
       var _this = this;
       var tempFilePath = e; // 替换为实际的临时文件路径
       uni.navigateTo({
@@ -536,7 +548,7 @@ var _default = {
       });
     },
     onChooseAvatar: function onChooseAvatar(e) {
-      var _this3 = this;
+      var _this4 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
@@ -556,8 +568,7 @@ var _default = {
                   // 	resize: true
                   // },
                   success: function success(res) {
-                    console.log(res);
-                    _this3.url = res.tempFilePaths[0];
+                    _this4.url = res.tempFilePaths[0];
 
                     // this.avatarPath = res.tempFilePaths[0];
                   }
@@ -576,10 +587,8 @@ var _default = {
                 // 			quality: 1, // 裁剪后的图片质量
                 // 			success: function(cropImageRes) {
                 // 				_this.url = cropImageRes.tempFilePath
-                // 				console.log('裁剪后的图片路径：' + cropImageRes.tempFilePath);
                 // 			},
                 // 			fail: function(err) {
-                // 				console.error('裁剪失败：' + err.errMsg);
                 // 			}
                 // 		});
                 // 	}
@@ -593,12 +602,10 @@ var _default = {
       }))();
     },
     onok: function onok(ev) {
-      console.log("事件触发");
       this.url = "";
       this.path = ev.path;
       this.bgUrl = ev.path;
       this.avatarPath = ev.path;
-      console.log("----ev.path-", ev.path);
     },
     oncancel: function oncancel() {
       // url设置为空，隐藏控件
@@ -607,8 +614,8 @@ var _default = {
     nextStepBack: function nextStepBack() {
       this.step = 0;
       this.showBorder = false;
-      this.gsUrl = null;
-      this.imgSelectIndex1 = null;
+      // this.gsUrl = null
+      // this.imgSelectIndex1 = null
     },
     nextStepBack1: function nextStepBack1() {
       // 清空画板上所有的贴纸
@@ -620,23 +627,20 @@ var _default = {
     },
     selectImg: function selectImg(item, index, type) {
       this.type = type || 'endlong';
-      console.log(item, index);
-      // this.avatarPath = item
-      // this.changeMask()
       this.imgSelectIndex = index;
       var self = this;
       var url = null;
-      console.log(type);
       if (type == "endlong") {
         url = self.imgList0[index];
       } else {
         url = self.imgList1[index];
       }
-      console.log(url);
+      self.imgurl = null;
+      // this.avatarPath = item
+      // this.changeMask()
       uni.getImageInfo({
         src: url,
         success: function success(res) {
-          console.log('-----res--', res);
           var maxWidth = getApp().globalData.windowWidth - 30;
           self.maskCenterY = self.img_h / 2;
           self.maskSizeHeight = maxWidth * res.height / res.width;
@@ -651,9 +655,7 @@ var _default = {
       uni.downloadFile({
         url: url,
         success: function success(res) {
-          console.log('-------', res);
           uni.hideLoading();
-          console.log(res.tempFilePath);
           self.imgurl = res.tempFilePath;
           self.photoUrl = res.tempFilePath;
           self.maskSize = 0;
@@ -668,67 +670,55 @@ var _default = {
       });
     },
     selectImg1: function selectImg1(item, index) {
-      console.log(item);
+      this.throttledSelectImg1Event(item, index);
+    },
+    selectImg1Event: function selectImg1Event(item, index) {
       var indx = this.maskOptList.findIndex(function (val) {
         return val.key === index;
       });
-      if (indx > -1) {
-        this.maskOptList.splice(indx);
-        return false;
-      }
-      this.imgSelectIndex1 = index;
-      var self = this;
-      var url = self.imgList2[index];
-      uni.getImageInfo({
-        src: url,
-        success: function success(res) {
-          console.log('-----res--', res);
-          var maxWidth = 80;
-          // 声明 maxX 变量
-          var maxX;
-          // 使用 this.type 来获取当前的 type 值
-          if (this.type === 'endlong') {
-            maxX = uni.upx2px(513); // 条件为真时赋值
-          } else {
-            maxX = uni.upx2px(568); // 条件为假时赋值
-          }
+      if (indx === -1) {
+        this.imgSelectIndex1 = index;
+        var self = this;
+        var url = self.imgList2[index];
+        uni.getImageInfo({
+          src: url,
+          success: function success(res) {
+            var maxWidth = 80;
+            // 声明 maxX 变量
+            var maxX;
+            // 使用 this.type 来获取当前的 type 值
+            if (this.type === 'endlong') {
+              maxX = uni.upx2px(513); // 条件为真时赋值
+            } else {
+              maxX = uni.upx2px(568); // 条件为假时赋值
+            }
 
-          self.maskOptList.forEach(function (v) {
-            return v.edit = false;
-          });
-          self.maskOptList.push({
-            key: index,
-            centerX: maxX / 2,
-            centerY: 100,
-            width: maxWidth,
-            height: maxWidth * res.height / res.width,
-            scale: 1,
-            rotate: 0,
-            rotateY: 0,
-            url: res.path,
-            edit: true
-          });
-        }
-      });
-      // uni.downloadFile({
-      // 	url: url,
-      // 	success: function(res) {
-      // 		console.log("+++++", res);
-      // 		// self.imgurl1 = res.tempFilePath
-      // 		self.gsUrl = res.tempFilePath
-      // 	},
-      // 	fail: function(e) {}
-      // })
+            self.maskOptList.forEach(function (v) {
+              return v.edit = false;
+            });
+            self.maskOptList.push({
+              key: index,
+              centerX: maxX / 2,
+              centerY: 100,
+              width: maxWidth,
+              height: maxWidth * res.height / res.width,
+              scale: 1,
+              rotate: 0,
+              rotateY: 0,
+              url: res.path,
+              edit: true
+            });
+          }
+        });
+      }
     },
     closeGuashi: function closeGuashi(index) {
-      console.log(index);
       this.maskOptList.splice(index, 1);
     },
     touchAvatarBg: function touchAvatarBg() {
       this.showBorder = false;
     },
     touchStart: function touchStart(e) {
-      console.log('e.target.id', e.target);
       this.maskOptList.forEach(function (v) {
         if ("mask_".concat(v.key) == e.target.dataset.key) {
           v.edit = true;
@@ -796,7 +786,6 @@ var _default = {
         }
         item.centerX = x;
         item.centerY = y;
-        // console.log(item);
 
         // this.maskCenterX = this.maskCenterX + moved_x;
         // this.maskCenterY = this.maskCenterY + moved_y;
@@ -861,7 +850,6 @@ var _default = {
       }
     },
     touchEnd: function touchEnd(e) {
-      console.log(e);
       this.mask_center_x = this.maskCenterX;
       this.mask_center_y = this.maskCenterY;
       this.cancel_center_x = this.cancelCenterX;
@@ -871,8 +859,6 @@ var _default = {
       this.touch_target = "";
       this.scaleCurrent = this.scale;
       this.rotateCurrent = this.rotate;
-      console.log("----x", this.cancel_center_x);
-      console.log("----y", this.cancel_center_y);
     },
     getRotationAngle: function getRotationAngle(centerX, centerY, x, y) {
       // 计算点到中心点的角度
@@ -892,9 +878,7 @@ var _default = {
       uni.downloadFile({
         url: url,
         success: function success(res) {
-          console.log('-------', res);
           uni.hideLoading();
-          console.log(res.tempFilePath);
           self.imgurl = res.tempFilePath;
         },
         fail: function fail(e) {}
@@ -1014,9 +998,7 @@ var _default = {
               // 	showCancel: false
               // });
               uni.vibrateShort({
-                success: function success() {
-                  console.log('vibrateShort');
-                }
+                success: function success() {}
               });
             },
             fail: function fail(res) {
@@ -1026,12 +1008,8 @@ var _default = {
                   success: function success(res) {
                     if (res.confirm) {
                       uni.openSetting({
-                        success: function success(res) {
-                          console.log("相册授权成功");
-                        },
-                        fail: function fail(res) {
-                          console.log(res);
-                        }
+                        success: function success(res) {},
+                        fail: function fail(res) {}
                       });
                     }
                   }

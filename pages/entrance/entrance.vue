@@ -159,7 +159,8 @@ export default {
   margin-left: 40rpx;
   width: 327rpx;
   height: 74rpx;
-  line-height: 84rpx;
+	padding-left: 10rpx;
+  line-height: 74rpx;
 }
 
 .text {
