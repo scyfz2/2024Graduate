@@ -149,7 +149,7 @@
 					// ctx.fillText('from UNNC', 240 * scale, 600 * scale);
 
 					ctx.setFontSize(15 * scale);
-					ctx.font = '12px PingFang SC'; // black，32px大小，Circular Po字体
+					ctx.font = '12px Circular Pro'; // black，32px大小，Circular Po字体
 					ctx.setFillStyle('#10263b');
 					ctx.fillText('Scan to', 91 * scale, 526 * scale); 
 					ctx.fillText('generate your', 91 * scale, 536 * scale);
@@ -164,7 +164,7 @@
 					// // 填充路径
 					// ctx.fill();
 					const QRcodeUrl = '/static/QRcode.png';
-					ctx.drawImage(QRcodeUrl, 28 * scale, 510 * scale, 55 * scale, 55 * scale);
+					ctx.drawImage(QRcodeUrl, 22 * scale, 508 * scale, 65 * scale, 65 * scale);
 					
 
 					// 绘制图片

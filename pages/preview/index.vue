@@ -69,7 +69,8 @@
 						uni.hideLoading()
 					},
 					fail(res) {
-						uni.hideLoading()
+						console.log(res);
+						// uni.hideLoading()
 						if (res.errMsg.indexOf("fail")) {
 							uni.showModal({
 								title: '您需要授权相册权限',

@@ -50,5 +50,6 @@
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
 	@import "app.css";
+	@import "Circular-Pro.css";
 </style>
 

@@ -1244,6 +1244,8 @@
 		.watermark1 {
 			// width: 100%;
 			// height: 60rpx;
+			// margin-top: 10rpx;
+			// margin-bottom: 10rpx;
 			padding: 20rpx 50rpx;
 			border-radius: 45rpx;
 			text-align: center;
@@ -1252,9 +1254,11 @@
 		}
 
 		.watermark2 {
+			margin-bottom: -20rpx;
 			width: 100%;
 			text-align: center;
 			font-size: 135rpx;
+			font-family: Circular Pro;
 			color: #dddfe2;
 			line-height: 210rpx;
 		}
